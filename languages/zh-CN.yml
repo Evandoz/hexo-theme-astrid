@@ -1,0 +1,30 @@
+Home: 首页
+Archives: 归档
+Categories: 分类
+Tags: 标签
+About: 关于
+
+rss: 订阅
+search: 搜索
+
+archive: 归档
+category: 分类
+tag: 标签
+
+recent_posts: 近期文章
+categories: 分类
+archives: 归档
+tagcloud: 标签云
+recent_comments: 最新评论
+
+read_more: 阅读全文
+
+contents: 文章目录
+none: 无
+
+post_total_count: 目前共计%d篇文章
+category_total_count: 目前共计%d个分类
+tag_total_count: 目前共计%d个标签
+
+month: 月份
+year: 年份

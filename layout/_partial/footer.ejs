@@ -1,0 +1,10 @@
+<footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; <% if (theme.since) { %><%= theme.since %> - <% } %><%= date(new Date(), 'YYYY') %> <%= config.title || config.author %>
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank">Astrid</a>
+    </div>
+  </div>
+</footer>

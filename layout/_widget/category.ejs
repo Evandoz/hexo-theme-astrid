@@ -1,0 +1,6 @@
+<% if (site.categories.length){ %>
+  <aside class="widget widget_categories">
+    <h4 class="widget-title"><%= __('categories') %></h4>
+    <%- list_categories({show_count: theme.show_count}) %>
+  </aside>
+<% } %>

@@ -1,0 +1,51 @@
+/*scrollbar*/
+::-webkit-scrollbar {
+  width: 4px
+  height: 0px
+  background-color: none
+}
+::-webkit-scrollbar-thumb {
+  width: 4px
+  height: 10px
+  background: #fcd088
+}
+
+/*scroll-up*/
+#scrollup {
+  position: fixed;
+  z-index: 999;
+  right: 25px;
+  bottom: 75px;
+
+  display: none;
+  overflow: hidden;
+
+  width: 45px;
+  height: 45px;
+
+  font-size: 40px;
+  line-height: 1;
+
+  color: #fcd088;
+  border: 1px solid #fcd088;
+  background-color: transparent;
+
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+
+  -webkit-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+     -moz-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+       -o-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+          transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
+}
+#scrollup:hover {
+  color: #fff;
+  background: #fcd088;
+}
+
+@import "_extend"
+@import "_partial/article"
+@import "_partial/archive"
+@import "_partial/highlight"
+@import "_partial/pagenav"

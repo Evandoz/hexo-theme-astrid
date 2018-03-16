@@ -1,0 +1,10 @@
+<% if (post.categories && post.categories.length){ %>
+  <span class="entry-categories">
+	<%- list_categories(post.categories, {
+      show_count: false,
+      class: 'entry-category',
+      style: 'none',
+      separator: ', '
+    }) %>
+  </span>
+<% } %>

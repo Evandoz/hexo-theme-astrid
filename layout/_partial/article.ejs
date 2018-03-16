@@ -1,0 +1,60 @@
+<article id="<%= post.layout %>-<%= post.slug %>" <% if (!index){ %>style="border: none; padding-bottom: 20px;"<% } %> class="article article-type-<%= post.layout %> hentry category-<%= post.category %> clearfix">
+  <header class="entry-header">
+  <% if (post.link || post.title){ %>
+    <%- partial('post/title', {class_name: 'entry-title'}) %>
+  <% } %>
+    <div class="entry-meta">
+      <%- partial('post/date', {class_name: 'entry-date', date_format: 'MMMM DD, YYYY'}) %>
+      <%- partial('post/category') %>
+      <%- partial('post/visitor') %>
+      <%- partial('post/comment') %>
+    </div>
+  </header>
+  <% if (index && (post.excerpt || theme.auto_excerpt)){ %>
+    <% if (post.photos != ""){ %>
+      <div class="entry-thumb">
+        <a href="<%- url_for(post.path) %>"><img width="500" height="300" src="<%= post.photos[0] %>" alt=""></a>
+      </div>
+    <% } else if (theme.random_thumb){ %>
+      <div class="entry-thumb">
+        <a href="<%- url_for(post.path) %>"><img width="500" height="300" src="https://unsplash.it/500/300/?random" alt=""></a>
+      </div>
+    <% } %>
+    <div class="entry-summary">
+      <% if (post.excerpt) { %>
+        <%- post.excerpt %>
+      <% } else if (theme.auto_excerpt) { %>
+        <%- truncate(strip_html(post.content), {length: 200, omission: '...'}) %>
+      <% } %>
+    </div>
+    <P class="read-more clearfix">
+      <a class="button post-button" href="<%- url_for(post.path) %>"><%= __('read_more') %></a>
+    </P>
+  <% } else { %>
+    <div class="entry-content"><%- post.content %></div>
+  <% } %>
+</article>
+<% if (!index) { %>
+  <footer class="entry-footer">
+    <div class="entry-meta" style="border-bottom: none;">
+      <%- partial('post/tag') %>
+    </div>
+    <%- partial('post/copyright') %>
+  </footer>
+  <%- partial('post/nav') %>
+  <% if (post.comments){ %>
+    <%- partial('comment') %>
+  <% } %>
+  </section>
+
+  <aside id="secondary"  class="widget-area" role="complementary">
+    <aside id="toc" class="toc-article">
+      <strong class="toc-title"><%= __('contents') %></strong>
+      <% if (toc(post.content) != ""){ %>
+        <%- toc(post.content, { "class": "nav" }) %>
+      <% } else { %>
+        <ol class="nav"><%= __('none') %></ol>
+      <% } %>
+    </aside>
+  </aside>
+<% } %>

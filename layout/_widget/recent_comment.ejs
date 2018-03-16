@@ -1,0 +1,18 @@
+<aside class="widget widget_recent_comments">
+  <h4 class="widget-title"><%= __('recent_comments') %></h4>
+  <% if (theme.duoshuo_shortname) { %>
+	<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="0" data-show-time="0" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
+	<style>
+	  #ds-recent-comments li.ds-comment {
+	    border-top: none !important;
+	    word-wrap: normal !important;
+	  }
+	  #ds-recent-comments li.ds-comment div {
+	    display: inline-block;
+	  }
+	  #ds-recent-comments li.ds-comment .ds-avatar {
+	    margin-top: 10px;
+	  }
+	</style>
+  <% } %>
+</aside>

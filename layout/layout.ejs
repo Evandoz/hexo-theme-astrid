@@ -1,0 +1,30 @@
+<%- partial('_partial/head') %>
+
+<% if (is_post()){ %>
+  <body data-spy="scroll" data-target="#toc" data-offset="110">
+<% } else {%>
+  <body>
+<% } %>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><%- body %>
+        <% if (!is_post()){ %>
+          </section>
+          <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
+        <% } %>
+      </div>
+    </div>
+    <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
+  </div>
+  <a id="scrollup"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
+  <%- partial('_partial/after-footer') %>
+
+</body>
+</html>

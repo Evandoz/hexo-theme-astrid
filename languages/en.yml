@@ -1,0 +1,30 @@
+Home: Home
+Archives: Archives
+Categories: Categories
+Tags: Tags
+About: About
+
+rss: RSS
+search: Search
+
+archive: Archive
+category: Category
+tag: Tag
+
+recent_posts: Recent Posts
+categories: Categories
+archives: Archives
+tagcloud: Tag Cloud
+recent_comments: Recent Comments
+
+read_more: Read More
+
+contents: Contents
+none: None
+
+post_total_count: There are %d posts in total till now.
+category_total_count: There are %d categories in total till now.
+tag_total_count: There are %d tags in total till now.
+
+month: Month
+year: Year

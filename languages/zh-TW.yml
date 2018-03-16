@@ -1,0 +1,30 @@
+Home: 首頁
+Archives: 彙整
+Categories: 分類
+Tags: 標籤
+About: 關于
+
+rss: 訂閱
+search: 搜尋
+
+archive: 彙整
+category: 分類
+tag: 標籤
+
+recent_posts: 近期文章
+categories: 分類
+archives: 彙整
+tagcloud: 標籤雲
+recent_comments: 最新评论
+
+read_more: 閱讀全文
+
+contents: 文章目錄
+none: 無
+
+post_total_count: 目前共計%d篇文章
+category_total_count: 目前共计%d个分類
+tag_total_count: 目前共计%d个標籤
+
+month: 月份
+year: 年份

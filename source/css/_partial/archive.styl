@@ -1,0 +1,102 @@
+.archives-article-wrap
+  padding-top: 30px
+  padding-bottom: 30px
+  blockquote
+    margin: 0
+    padding: 1em
+    font-size: 1.2em
+    font-weight: bold
+    color: #656d6d
+    text-align: center
+    border: none
+    a
+      padding: 0 5px
+      color: #272727
+      text-decoration: none
+      &:hover
+        color: #fcd088
+        text-decoration: none
+
+.archives-wrap
+  margin: 10px 0
+
+.archive-year-wrap
+  padding: .5em 0
+  h2
+    color: #fcd088
+    font-size: 1.6em
+    a
+      text-decoration: none
+      &:hover
+        text-decoration: none
+
+.archive-year
+  @extend $block-caption
+  margin: 0
+  padding: 10px 0
+
+.archive-year:before
+  font-family: "FontAwesome"
+  content: "\f073"
+  margin-right: .2em
+
+.archive-content-wrap
+  margin: 0 2em
+  column-gap: 10px
+
+.archive-entry-header
+  padding: 15px 0
+
+.archive-entry-date
+  float: left
+  margin-right: 0.9em
+  font-size: 1.2em
+  line-height: 1.2
+  font-family: 'Open Sans', sans-serif
+  a
+    font-size: 1.2em
+    line-height: 1.2
+    color: #272727
+    text-decoration: none
+    transition: color 0.3s
+    &:hover
+      color: #fcd088
+      text-decoration: none
+
+.archive-entry-title
+  display: inline-block
+  margin: 0
+  padding-left: 0.9em
+  border-left: 1px solid #272727;
+  font-family: 'Open Sans', sans-serif
+  font-size: 1.2em
+  line-height: 1.2
+  a
+    font-size: 1.2em
+    line-height: 1.2
+    color: #272727
+    text-decoration: none
+    transition: color 0.3s
+    &:hover
+      color: #fcd088
+      text-decoration: none
+
+.archive-tag
+  @extend $block-caption
+  text-transform: none;
+  color: #fcd088
+
+.archive-tag:before
+  font-family: "FontAwesome"
+  content: "\f02c"
+  margin-right: .2em
+
+.archive-category
+  @extend $block-caption
+  text-transform: none;
+  color: #fcd088
+
+.archive-category:before
+  font-family: "FontAwesome"
+  content: "\f07c"
+  margin-right: .3em

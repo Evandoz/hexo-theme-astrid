@@ -1,0 +1,21 @@
+<header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding  col-xs-8">
+      <h1 class="site-title">
+        <a href="<%- url_for() %>" title="<%= config.title %>" rel="home"><%= config.title %></a>
+      </h1>
+      <% if (config.description){ %>
+        <p class="site-description"><%= config.description %></p>
+      <% } %>
+    </div>
+    <div class="btn-menu col-xs-4"></i><i class="fa fa-navicon"></i></div>
+    <nav id="mainnav" class="main-navigation col-xs-12 col-md-8 col-sm-6" role="navigation">
+      <ul id="primary-menu" class="menu">
+        <% for (var i in theme.menu){ %>
+          <li><a href="<%- url_for(theme.menu[i]) %>" title="<%= i %>"><%= __(i) %></a></li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</header>
+<div class="header-clone"></div>

@@ -1,0 +1,18 @@
+<% if (post.prev || post.next){ %>
+  <nav class="navigation post-navigation" role="navigation">
+    <div class="nav-links">
+      <% if (post.prev){ %>
+        <div class="nav-prev">
+          <a href="<%- url_for(post.prev.path) %>" rel="prev">
+            <% if (post.prev.title){ %><%= post.prev.title %><% } else { %>(no title)<% } %>
+          </a>
+        </div>
+      <% } %>
+      <% if (post.next){ %>
+        <div class="nav-next">
+          <a href="<%- url_for(post.next.path) %>" rel="prve"><%= post.next.title %></a>
+        </div>
+      <% } %>
+      </div>
+  </nav>
+<% } %>
