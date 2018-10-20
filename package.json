@@ -2,14 +2,14 @@
   "name": "hexo-theme-astrid",
   "version": "1.0.0",
   "description": "A theme for Hexo.",
-  "author": "Laueray",
+  "author": "Levan",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Laueray/hexo-theme-astrid"
+    "url": "https://github.com/Evandoz/hexo-theme-astrid"
   },
   "license": "MIT",
   "private": true,
-  "homepage": "https://github.com/Laueray/hexo-theme-astrid",
+  "homepage": "https://github.com/Evandoz/hexo-theme-astrid",
   "devDependencies": {
   }
 }

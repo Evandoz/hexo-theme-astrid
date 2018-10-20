@@ -1,10 +1,10 @@
 # Astrid
 
-[![Build Status](https://travis-ci.org/Laueray/hexo-theme-astrid.svg?branch=master)](https://travis-ci.org/Laueray/hexo-theme-astrid)   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Laueray/hexo-theme-astrid/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Evandoz/hexo-theme-astrid.svg?branch=master)](https://travis-ci.org/Evandoz/hexo-theme-astrid)   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Evandoz/hexo-theme-astrid/blob/master/LICENSE)
 
 A theme for Hexo.
 
-[**Live Preview**](http://blog.floretten.com/hexo-theme-astrid/)  |   [**中文文档**](https://github.com/Laueray/hexo-theme-astrid/blob/master/README.zh.md)
+[**Live Preview**](https://evandoz.github.io/hexo-theme-astrid/)  |   [**中文文档**](https://github.com/Evandoz/hexo-theme-astrid/blob/master/README.zh.md)
 
 
 ![Desktop Preview](source/preview/preview-desktop.png?raw=true)
@@ -18,7 +18,7 @@ A theme for Hexo.
  1. Get it from GitHub
 
  ```shell
- $ git clone https://github.com/Laueray/hexo-theme-astrid.git themes/astrid
+ $ git clone https://github.com/Evandoz/hexo-theme-astrid.git themes/astrid
  ```
  2. Enable
 
@@ -111,7 +111,7 @@ reward:
 
 # Comments
 # Choose only one to display
-duoshuo_shortname: laueray # Enter your duoshuo shortname here.
+duoshuo_shortname: # Enter your duoshuo shortname here.
 disqus_shortname: # Enter your duoshuo shortname here.
 uyan_id: # Enter your uyan id
 
@@ -175,7 +175,6 @@ Astrid has native support for DuoShuo & Disqus & uyan comment systems. Modify th
 ```yml
 # Comments
 # Choose only one to display
-duoshuo_shortname: laueray # Enter your duoshuo shortname here.
 disqus_shortname: # Enter your duoshuo shortname here.
 uyan_id: # Enter your uyan id
 ```

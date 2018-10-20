@@ -1,10 +1,10 @@
 # Astrid
 
-[![Build Status](https://travis-ci.org/Laueray/hexo-theme-astrid.svg?branch=master)](https://travis-ci.org/Laueray/hexo-theme-astrid)   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Laueray/hexo-theme-astrid/blob/master/LICENSE)
+[![Build Status](https://travis-ci.org/Evandoz/hexo-theme-astrid.svg?branch=master)](https://travis-ci.org/Evandoz/hexo-theme-astrid)   [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Evandoz/hexo-theme-astrid/blob/master/LICENSE)
 
 A theme for Hexo.
 
-[**在线预览**](http://blog.floretten.com/hexo-theme-astrid/)  |   [**English Documentation**](https://github.com/Laueray/hexo-theme-astrid/blob/master/README.md)
+[**在线预览**](https://evandoz.github.io/hexo-theme-astrid/)  |   [**English Documentation**](https://github.com/Evandoz/hexo-theme-astrid/blob/master/README.md)
 
 
 ![桌面端预览](source/preview/preview-desktop.png?raw=true)
@@ -18,7 +18,7 @@ A theme for Hexo.
  1. 从 GitHub 上获取主题源码
 
  ```shell
- $ git clone https://github.com/Laueray/hexo-theme-astrid.git themes/astrid
+ $ git clone https://github.com/Evandoz/hexo-theme-astrid.git themes/astrid
  ```
  2. 在配置中启用主题
 
@@ -106,7 +106,6 @@ reward:
   wechatpay:
 
 # 文章评论，选择一种评论系统即可
-duoshuo_shortname: laueray # Enter your duoshuo shortname here.
 disqus_shortname: # Enter your duoshuo shortname here.
 uyan_id: # Enter your uyan id
 
@@ -170,7 +169,6 @@ Astrid 支持多说/Diqus/友言评论系统，具体可在 `astrid/_config.yml`
 ```yml
 # Comments
 # Choose only one to display
-duoshuo_shortname: laueray # Enter your duoshuo shortname here.
 disqus_shortname: # Enter your duoshuo shortname here.
 uyan_id: # Enter your uyan id
 ```
