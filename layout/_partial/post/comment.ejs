@@ -1,9 +1,5 @@
 <span class="entry-comments">
-  <% if (theme.duoshuo_shortname) { %>
-	<a href="<%- url_for(post.path) %>#comments" itemprop="discussionUrl">
-	  <span class="ds-thread-count" data-thread-key="<%- url_for(post.path) %>" data-count-type="comments"></span>
-    </a>
-  <% } else if (theme.disqus_shortname) { %>
+  <% if (theme.disqus_shortname) { %>
     <a href="<%- url_for(post.path) %>#comments" itemprop="discussionUrl">
       <span class="disqus-comment-count" data-disqus-identifier="<%= post.path %>" data-disqus-url="<%= page.permalink %>" itemprop="commentCount"></span>
     </a>

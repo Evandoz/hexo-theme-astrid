@@ -1,7 +1,5 @@
 <div id="comments" class="comments-area">
-  <% if (theme.duoshuo_shortname){ %>
-	<div class="ds-thread" data-thread-key="<%- url_for(post.path) %>" data-title="<%- post.title %>" data-url="<%- post.permalink %>"></div>
-  <% } else if (theme.disqus_shortname) {%>
+  <% if (theme.disqus_shortname) {%>
 	<div id="disqus_thread"></div>
   <% } else if (theme.uyan_id) {%>
 	<div class="uyan_frame"></div>
