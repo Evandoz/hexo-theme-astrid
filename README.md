@@ -64,27 +64,6 @@ keywords: ""
 # (E.g. `http://abc.com/favicon.ico` or `css/images/favicon.ico`)
 favicon: css/images/favicon.ico
 
-# Home auto excerpt
-auto_excerpt: true
-
-# Random thumb for article placeholder
-random_thumb: true
-
-# Statistics article reading volume based on leancloud
-leancloud_visitors:
-  enable: true
-  app_id: #app_id
-  app_key: #app_key
-
-# Sidebar
-widgets:
-- recent_post
-- social
-- archive
-- tagcloud
-- category
-- recent_comment
-
 # Social Links
 # Key is the name of social.
 # Value is the target link
@@ -103,80 +82,15 @@ highlight_theme: normal
 archive_type: 'monthly'
 show_count: true
 
-# Reward for article (Unfulfilled)
-reward:
-  enable: false
-  alipay:
-  wechatpay:
-
-# Comments
-# Choose only one to display
-duoshuo_shortname: # Enter your duoshuo shortname here.
-disqus_shortname: # Enter your duoshuo shortname here.
-uyan_id: # Enter your uyan id
-
 # Webmaster tools verification setting
 google_site_verification:
 baidu_site_verification:
 qihu_site_verification:
 
-# Analytics
-baidu_analytics:
-google_analytics:
-gauges_analytics:
-tencent_analytics:
-tencent_mta:
-
-# Facebook SDK Support
-facebook_sdk:
-  enable: false
-  app_id:       #<app_id>
-  fb_admin:     #<user_id>
-  like_button:  #true
-  webmaster:    #true
-
-# CNZZ count
-cnzz_siteid:
-
-# Application Insights
-application_insights:
-
 # MathJax Support
 mathjax:
   enable: false
   per_page: false
-```
-
-## Features
-
-### lightgallery
-
-Astrid uses [lightgallery.js](https://sachinchoolur.github.io/lightgallery.js/) to showcase these photos.
-
-![](source/preview//lightgallery.png "")
-
-### Sidebar
-
-Astrid provides 6 built-in widgets:
-
-- recent_post
-- social
-- archive
-- tagcloud
-- category
-- recent_comment
-
-All of them are enabled by default. You can edit them in `widget` setting.
-
-### Comment support
-
-Astrid has native support for DuoShuo & Disqus & uyan comment systems. Modify the following snippets to astrid `astrid/_config.yml`:
-
-```yml
-# Comments
-# Choose only one to display
-disqus_shortname: # Enter your duoshuo shortname here.
-uyan_id: # Enter your uyan id
 ```
 
 ## Browser support

@@ -62,27 +62,6 @@ keywords: ""
 # (示例 `http://abc.com/favicon.ico` or `css/images/favicon.ico`)
 favicon: css/images/favicon.ico
 
-# 首页文章摘要
-auto_excerpt: true
-
-# 文章随机占位图片
-random_thumb: true
-
-# 统计文章阅读量，需要注册 leancloud
-leancloud_visitors:
-  enable: true
-  app_id: #app_id
-  app_key: #app_key
-
-# 侧边栏挂件
-widgets:
-- recent_post
-- social
-- archive
-- tagcloud
-- category
-- recent_comment
-
 # 社交链接
 # 键是社交平台名称，值是该平台的个人链接
 social:
@@ -99,79 +78,15 @@ highlight_theme: normal
 archive_type: 'monthly'
 show_count: true
 
-# 文章打赏 (未完成)
-reward:
-  enable: false
-  alipay:
-  wechatpay:
-
-# 文章评论，选择一种评论系统即可
-disqus_shortname: # Enter your duoshuo shortname here.
-uyan_id: # Enter your uyan id
-
 # 站长工具的网站验证
 google_site_verification:
 baidu_site_verification:
 qihu_site_verification:
 
-# 网站分析
-baidu_analytics:
-google_analytics:
-gauges_analytics:
-tencent_analytics:
-tencent_mta:
-
-# 网站分析，Facebook接口
-facebook_sdk:
-  enable: false
-  app_id:       #<app_id>
-  fb_admin:     #<user_id>
-  like_button:  #true
-  webmaster:    #true
-
-# CNZZ 统计
-cnzz_siteid:
-
-# Application Insights 性能分析
-application_insights:
-
 # 数学公式支持
 mathjax:
   enable: false
   per_page: false
-```
-
-## 主题特性
-
-### 文章相册
-
-Astrid 使用 [lightgallery.js](https://sachinchoolur.github.io/lightgallery.js/) 来帮助我们浏览图片。
-
-![](source/preview//lightgallery.png "")
-
-### 侧边栏
-
-Astrid 提供了 6 中侧边栏挂件:
-
-- recent_post  #最近文章
-- social  #社交链接
-- archive  #文章归档
-- tagcloud  #标签云
-- category  #文章分类
-- recent_comment  #最新评论
-
-这些挂件默认都添加到页面中，你可以在主题配置的 `widget` 选择要添加的挂件。
-
-### 文章评论
-
-Astrid 支持多说/Diqus/友言评论系统，具体可在 `astrid/_config.yml` 中配置:
-
-```yml
-# Comments
-# Choose only one to display
-disqus_shortname: # Enter your duoshuo shortname here.
-uyan_id: # Enter your uyan id
-```
 
 ## 浏览器支持
 

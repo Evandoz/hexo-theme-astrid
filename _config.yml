@@ -21,12 +21,6 @@ keywords: ""
 # (E.g. `http://abc.com/favicon.ico` or `css/images/favicon.ico`)
 favicon: css/images/favicon.ico
 
-# Statistics article reading volume based on leancloud
-leancloud_visitors:
-  enable: true
-  app_id: #app_id
-  app_key: #app_key
-
 # Social Links
 # Key is the name of social
 # Value is the target link
@@ -44,11 +38,6 @@ highlight_theme: normal
 # widget behavior
 archive_type: 'monthly'
 show_count: true
-
-# Comments
-# Choose only one to display
-disqus_shortname: # Enter your duoshuo shortname here
-uyan_id: # Enter your uyan id
 
 # Webmaster tools verification setting
 google_site_verification:
