@@ -1,10 +1,6 @@
 <%- partial('_partial/head') %>
 
-<% if (is_post()){ %>
-  <body data-spy="scroll" data-target="#toc" data-offset="110">
-<% } else {%>
-  <body>
-<% } %>
+<body>
   <div class="preloader">
     <div class="preloader-inner">
       <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
@@ -14,11 +10,7 @@
     <%- partial('_partial/header', null, {cache: !config.relative_link}) %>
     <div id="content" class="site-content">
       <div class="container">
-        <section id="primary" class="content-area"><%- body %>
-        <% if (!is_post()){ %>
-          </section>
-          <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
-        <% } %>
+        <section id="primary" class="content-area"><%- body %></section>
       </div>
     </div>
     <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>

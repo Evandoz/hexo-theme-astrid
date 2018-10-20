@@ -1,0 +1,143 @@
+/*--------------------------------------------------------------
+## Preloader
+--------------------------------------------------------------*/
+.preloader {
+	background-color: #fff;
+	position: fixed;
+	height: 100%;
+	width: 100%;
+	top: 0;
+	left: 0;
+	z-index: 9999;
+	-webkit-transition: all 0.5s;
+	transition: all 0.5s;
+}
+.preloader-hidden {
+	opacity: 0;
+}
+.preloader-inner {
+	position: absolute;
+	margin: auto;
+	top: 50%;
+	left: 0;
+	right: 0;
+	width: 88px;
+}
+.preloader-inner ul {
+	margin: 0;
+	list-style: none;
+	width: 88px;
+	height: 63px;
+	position: relative;
+	padding: 0;
+	height: 10px;
+}
+.preloader-inner ul li {
+	position: absolute;
+	width: 2px;
+	height: 0;
+	background-color: #fcd088;
+	bottom: 0;
+}
+.preloader-inner li:nth-child(1) {
+	left: 0;
+	animation: preloader1 1.15s ease infinite 0;
+	-ms-animation: preloader1 1.15s ease infinite 0;
+	-webkit-animation: preloader1 1.15s ease infinite 0;
+}
+.preloader-inner li:nth-child(2) {
+	left: 15px;
+	animation: preloader2 1.15s ease infinite 0.12s;
+	-ms-animation: preloader2 1.15s ease infinite 0.12s;
+	-webkit-animation: preloader2 1.15s ease infinite 0.12s;
+}
+.preloader-inner li:nth-child(3) {
+	left: 29px;
+	animation: preloader1 1.15s ease-in-out infinite 0.23s;
+	-ms-animation: preloader1 1.15s ease-in-out infinite 0.23s;
+	-webkit-animation: preloader1 1.15s ease-in-out infinite 0.23s;
+}
+.preloader-inner li:nth-child(4) {
+	left: 44px;
+	animation: preloader2 1.15s ease-in infinite 0.35s;
+	-ms-animation: preloader2 1.15s ease-in infinite 0.35s;
+	-webkit-animation: preloader2 1.15s ease-in infinite 0.35s;
+}
+.preloader-inner li:nth-child(5) {
+	left: 58px;
+	animation: preloader1 1.15s ease-in-out infinite 0.46s;
+	-ms-animation: preloader1 1.15s ease-in-out infinite 0.46s;
+	-webkit-animation: preloader1 1.15s ease-in-out infinite 0.46s;
+}
+.preloader-inner li:nth-child(6) {
+	left: 73px;
+	animation: preloader2 1.15s ease infinite 0.58s;
+	-ms-animation: preloader2 1.15s ease infinite 0.58s;
+	-webkit-animation: preloader2 1.15s ease infinite 0.58s;
+}
+@keyframes preloader1 {
+	0% {
+		height: 10px;
+	}
+	50% {
+		height: 49px;
+	}
+	100% {
+		height: 10px;
+	}
+}
+@-ms-keyframes preloader1 {
+	0% {
+		height: 10px;
+	}
+	50% {
+		height: 49px;
+	}
+	100% {
+		height: 10px;
+	}
+}
+@-webkit-keyframes preloader1 {
+	0% {
+		height: 10px;
+	}
+	50% {
+		height: 49px;
+	}
+	100% {
+		height: 10px;
+	}
+}
+@keyframes preloader2 {
+	0% {
+		height: 19px;
+	}
+	50% {
+		height: 63px;
+	}
+	100% {
+		height: 19px;
+	}
+}
+@-ms-keyframes preloader2 {
+	0% {
+		height: 19px;
+	}
+	50% {
+		height: 63px;
+	}
+	100% {
+		height: 19px;
+	}
+}
+@-webkit-keyframes preloader2 {
+	0% {
+		height: 19px;
+	}
+	50% {
+		height: 63px;
+	}
+	100% {
+		height: 19px;
+	}
+}

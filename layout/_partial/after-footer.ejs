@@ -1,48 +1,7 @@
-<% if (theme.diqus_shortname) { %>
-  <script type="text/javascript">
-  var disqus_config = function () {
-    this.page.url = '<%= page.permalink %>';
-    this.page.identifier = '<%= page.path %>';
-    this.page.title = '<%= page.title|addslashes %>';
-  };
-  (function(){
-	var d = document, s = d.createElement('script');
-  s.src = 'https://<%= theme.disqus_shortname %>.disqus.com/embed.js';
-  s.setAttribute('data-timestamp', '' + +new Date());
-  (d.head || d.body).appendChild(s);
-  </script>
-  <script id="dsq-count-scr" src="https://<%= theme.disqus_shortname %>.disqus.com/count.js" async></script>
-<% } else if (theme.uyan_id) { %>
-  <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=<%= theme.uyan_id %>"></script>
-<% } %>
-
-<%- js('js/jquery.min') %>
-<%- js('js/bootstrap.min') %>
-<%- js('js/html5shiv') %>
-<%- js('js/main') %>
+<%- js('js/jquery') %>
+<%- js('js/velocity') %>
+<%- js('js/plugins') %>
 <%- js('js/scripts') %>
-
-<% if (!is_post()) { %>
-  <%- js('js/tagcloud') %>
-<% } %>
-
-<%- css('light/css/lightgallery.min') %>
-<%- js('light/js/lightgallery.min') %>
-<%- js('light/js/lg-thumbnail.min') %>
-<%- js('light/js/lg-pager.min') %>
-<%- js('light/js/lg-autoplay.min') %>
-<%- js('light/js/lg-fullscreen.min') %>
-<%- js('light/js/lg-zoom.min') %>
-<%- js('light/js/lg-hash.min') %>
-<%- js('light/js/lg-share.min') %>
-<%- js('light/js/lg-video.min') %>
+<%- js('js/tagcloud') %>
 
 <%- partial('post/mathjax') %>
-<%- partial('analytics/baidu-push') %>
-<%- partial('analytics/lean-analytics') %>
-<%- partial('analytics/baidu-analytics') %>
-<%- partial('analytics/cnzz-analytics') %>
-<%- partial('analytics/facebook-sdk') %>
-<%- partial('analytics/gauges-analytics') %>
-<%- partial('analytics/google-analytics') %>
-<%- partial('analytics/tencent-analytics') %>

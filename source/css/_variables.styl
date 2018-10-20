@@ -1,0 +1,43 @@
+// Config
+support-for-ie = false
+vendor-prefixes = webkit moz ms official
+
+// Colors
+color-white = #ffffff
+color-lighter = #fbfbfb
+color-light = #f6f6f6
+color-border = #eeeeee
+color-grey = #556677
+color-font = #334455
+color-dark = #112233
+color-black = #000000
+
+// Fonts
+@font-face
+  font-family: SourceCodePro
+  src: url("fonts/SourceCodePro-Regular.ttf") format("truetype")
+  font-style: normal
+  font-weight: normal
+
+font-sans = "Galdeano", "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif
+font-serif = Georgia, "Times New Roman", serif
+font-mono = "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace
+font-size = 15px
+
+// Animation
+@keyframes spinner
+  0%
+    -moz-transform: rotate(0deg)
+    -webkit-transform: rotate(0deg)
+    -ms-transform: rotate(0deg)
+    transform: rotate(0deg)
+
+  100%
+    -moz-transform: rotate(359deg)
+    -webkit-transform: rotate(359deg)
+    -ms-transform: rotate(359deg)
+    transform: rotate(359deg)
+
+// Media queries
+mq-mobile = "(max-width: 768px)"
+mq-normal = "(min-width: 784px)"
