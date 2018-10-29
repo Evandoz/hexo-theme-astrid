@@ -7,11 +7,11 @@
 
 	//Menu bar
 	var headerHeight = $('.site-header').outerHeight();
-	$('.header-clone').css('height',headerHeight);
+	$('.copy').css('height',headerHeight);
 
 	$(window).resize(function(){
 		var headerHeight = $('.site-header').outerHeight();
-		$('.header-clone').css('height',headerHeight);
+		$('.copy').css('height',headerHeight);
 	});
 
 	//Menu bar
@@ -183,18 +183,19 @@
 	$('#entry-content').poptrox(option);
 
 	//Scroll up
-	var $viewport = $('html, body');
-	window.onload = $(function() {
+	var $viewport = $('html, body'),
+		$topAnchor = $('#top-anchor');
+	$(function() {
 		$(window).scroll(function() {
-			$(window).scrollTop() > $(window).height()*0.5 ? $('#scrollup').fadeIn(200) : $('#scrollup').fadeOut(100);
-	});
-			$('#scrollup').click(function() {
-					$viewport.animate({scrollTop: 0}, 800);
-				});
-			$viewport.bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
-					if(e.which > 0 || e.type === "mousedown" || e.type === "mousewheel"){
-							$viewport.stop();
-					}
-			});
+			$(this).scrollTop() > $(this).height() ? $topAnchor.addClass('on') : $topAnchor.removeClass('on');
+		});
+		$topAnchor.click(function() {
+			$viewport.animate({scrollTop: 0}, 600);
+		});
+		$viewport.bind("scroll mousedown DOMMouseScroll mousewheel keyup", function(e){
+			if(e.which > 0 || e.type === "mousedown" || e.type === "mousewheel"){
+				$viewport.stop();
+			}
+		});
 	});
 })(jQuery);

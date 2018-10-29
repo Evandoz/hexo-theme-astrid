@@ -1,3 +1,6 @@
+<!DOCTYPE html>
+<html>
+
 <%- partial('_partial/head') %>
 
 <body>
@@ -11,12 +14,14 @@
     <div id="content" class="site-content">
       <div class="container">
         <section id="primary" class="content-area"><%- body %></section>
+        <%- partial('_partial/sidebar', null, {cache: !config.relative_link}) %>
       </div>
     </div>
     <%- partial('_partial/footer', null, {cache: !config.relative_link}) %>
   </div>
-  <a id="scrollup"><i class="fa fa-angle-up" aria-hidden="true"></i></a>
-  <%- partial('_partial/after-footer') %>
+  <%- partial('_partial/anchor') %>
+  <%- partial('_partial/script') %>
 
 </body>
+
 </html>

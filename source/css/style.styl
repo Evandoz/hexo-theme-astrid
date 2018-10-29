@@ -1,125 +1,119 @@
 @import "nib"
 @import "_variables"
+@import "_util/grid"
 
 global-reset()
 
-body {
-	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
-	color: #656D6D;
-	word-wrap: break-word;
-	line-height: 1.8;
-	letter-spacing: 1px;
-	background-color: #F5F9F8;
-	font-weight: 300;
-	text-rendering: optimizeLegibility;
-}
-h1, h2, h3, h4, h5, h6 {
-	color: #272727;
-	font-family: 'Josefin Sans', sans-serif;
-	font-weight: 300;
-	margin-top: 20px;
-	margin-bottom: 20px;
-	letter-spacing: 1px;
-}
+body
+  font-family: 'Open Sans', sans-serif
+  font-size: 14px
+  color: #656D6D
+  word-wrap: break-word
+  line-height: 1.8
+  letter-spacing: 1px
+  background-color: #F5F9F8
+  font-weight: 300
+  text-rendering: optimizeLegibility
 
-h1 { font-size: 28px; }
-h2 { font-size: 22px; }
-h3 { font-size: 18px; }
-h4 { font-size: 16px; }
-h5 { font-size: 14px; }
-h6 { font-size: 12px; }
-a,
-a:hover {
-	color: #fcd088;
-	text-decoration: none;
-	transition: color 0.3s;
-}
-blockquote {
-	border-left: 5px solid #ebebeb;
-    padding-left: 15px;
-    margin-left: 0;
-}
-p {
-	margin-bottom: 20px;
-}
-li {
-	list-style: none;
-}
-/*--------------------------------------------------------------
-# Tables
---------------------------------------------------------------*/
-table {
-	width: 100%;
-	margin-bottom: 20px;
-	border: 1px solid #e0e0e0;
-}
-th {
-	background-color: #f7f7f7;
-}
+h1, h2, h3, h4, h5, h6
+  color: #272727
+  font-family: 'Josefin Sans', sans-serif
+  font-weight: 300
+  margin-top: 20px
+  margin-bottom: 20px
+  letter-spacing: 1px
+
+h1
+  font-size: 28px
+h2
+  font-size: 22px
+h3
+  font-size: 18px
+h4
+  font-size: 16px
+h5
+  font-size: 14px
+h6
+  font-size: 12px
+a, a:hover
+  color: #fcd088
+  text-decoration: none
+  transition: color 0.3s
+
+blockquote
+  border-left: 5px solid #ebebeb
+  padding-left: 15px
+  margin-left: 0
+
+p
+  margin-bottom: 20px
+
+li
+  list-style: none
+
+table
+  width: 100%
+  margin-bottom: 20px
+  border: 1px solid #e0e0e0
+
+th
+  background-color: #f7f7f7
+
 table > thead > tr > th,
 table > tbody > tr > th,
 table > tfoot > tr > th,
 table > thead > tr > td,
 table > tbody > tr > td,
-table > tfoot > tr > td {
-	padding: 10px;
-	line-height: 1.42857143;
-	vertical-align: top;
-}
+table > tfoot > tr > td
+  padding: 10px
+  line-height: 1.42857143
+  vertical-align: top
+
 table > thead > tr > th,
 table > tbody > tr > th,
 table > tfoot > tr > th,
 table > thead > tr > td,
 table > tbody > tr > td,
-table > tfoot > tr > td {
-	border: 1px solid #dddddd;
-}
-/*--------------------------------------------------------------
-Forms
---------------------------------------------------------------*/
-button,
-input,
-select,
-textarea {
-	font-size: 100%; /* Corrects font size not being inherited in all browsers */
-	margin: 0; /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
-	vertical-align: baseline; /* Improves appearance and consistency in all browsers */
-	padding: 15px;
-}
-button,
-.button,
+table > tfoot > tr > td
+  border: 1px solid #dddddd
+
+button, input, select, textarea
+  font-size: 100% /* Corrects font size not being inherited in all browsers */
+  margin: 0 /* Addresses margins set differently in IE6/7, F3/4, S5, Chrome */
+  vertical-align: baseline /* Improves appearance and consistency in all browsers */
+  padding: 15px
+
+button, .button,
 input[type="button"],
 input[type="reset"],
-input[type="submit"] {
-	font-size: 14px;
-	padding: 4px 16px;
-	border: 1px solid #fcd088;
-	color: #fcd088;
-	text-transform: uppercase;
-	letter-spacing: 1px;
-	background-color: transparent;
-	-webkit-transition: all 0.3s;
-	transition: all 0.3s;
-	cursor: pointer; /* Improves usability and consistency of cursor style between image-type 'input' and others */
-	-webkit-appearance: button; /* Corrects inability to style clickable 'input' types in iOS */
-}
-.button {
-	-webkit-appearance: none;
-}
+input[type="submit"]
+  font-size: 14px
+  padding: 12px 30px
+  border: 1px solid #fcd088
+  color: #fcd088
+  text-transform: uppercase
+  letter-spacing: 1px
+  background-color: transparent
+  -webkit-transition: all 0.3s
+  transition: all 0.3s
+  cursor: pointer /* Improves usability and consistency of cursor style between image-type 'input' and others */
+  -webkit-appearance: button /* Corrects inability to style clickable 'input' types in iOS */
 
-input[type="submit"] {
-	margin-top: 5px;
-}
+.button
+  -webkit-appearance: none
+
+
+input[type="submit"]
+  margin-top: 5px
+
 button:hover,
 .button:hover,
 input[type="button"]:hover,
 input[type="reset"]:hover,
-input[type="submit"]:hover {
-	background-color: #fcd088;
-	text-decoration: none;
-	color: #333;
-}
+input[type="submit"]:hover
+  background-color: #fcd088
+  text-decoration: none
+  color: #333
 
 button:focus,
 input[type="button"]:focus,
@@ -128,32 +122,27 @@ input[type="submit"]:focus,
 button:active,
 input[type="button"]:active,
 input[type="reset"]:active,
-input[type="submit"]:active {
-	border-color: #aaa #bbb #bbb;
-	box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15);
-}
+input[type="submit"]:active
+  border-color: #aaa #bbb #bbb
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.5), inset 0 2px 5px rgba(0, 0, 0, 0.15)
 
 input[type="checkbox"],
-input[type="radio"] {
-	padding: 0; /* Addresses excess padding in IE8/9 */
-}
+input[type="radio"]
+  padding: 0 /* Addresses excess padding in IE8/9 */
 
-input[type="search"] {
-	-webkit-appearance: textfield; /* Addresses appearance set to searchfield in S5, Chrome */
-	-webkit-box-sizing: content-box; /* Addresses box sizing set to border-box in S5, Chrome (include -moz to future-proof) */
-	-moz-box-sizing:    content-box;
-	box-sizing:         content-box;
-}
+input[type="search"]
+  -webkit-appearance: textfield /* Addresses appearance set to searchfield in S5, Chrome */
+  -webkit-box-sizing: content-box /* Addresses box sizing set to border-box in S5, Chrome (include -moz to future-proof) */
+  -moz-box-sizing:    content-box
+  box-sizing:         content-box
 
-input[type="search"]::-webkit-search-decoration { /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
-	-webkit-appearance: none;
-}
+input[type="search"]::-webkit-search-decoration /* Corrects inner padding displayed oddly in S5, Chrome on OSX */
+  -webkit-appearance: none
 
 button::-moz-focus-inner,
-input::-moz-focus-inner { /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
-	border: 0;
-	padding: 0;
-}
+input::-moz-focus-inner /* Corrects inner padding and border displayed oddly in FF3/4 www.sitepen.com/blog/2008/05/14/the-devils-in-the-details-fixing-dojos-toolbar-buttons/ */
+  border: 0
+  padding: 0
 
 input[type="text"],
 input[type="email"],
@@ -161,12 +150,11 @@ input[type="url"],
 input[type="password"],
 input[type="search"],
 input[type="tel"],
-textarea {
-	color: #666;
-	border: 1px solid #ebebeb;
-	border-radius: 3px;
-	font-weight: 400;
-}
+textarea
+  color: #666
+  border: 1px solid #ebebeb
+  border-radius: 3px
+  font-weight: 400
 
 input[type="text"]:focus,
 input[type="email"]:focus,
@@ -174,73 +162,52 @@ input[type="url"]:focus,
 input[type="password"]:focus,
 input[type="search"]:focus,
 input[type="tel"]:focus,
-textarea:focus {
-	color: #111;
-}
+textarea:focus
+  color: #111
 
 input[type="text"],
 input[type="email"],
 input[type="url"],
 input[type="password"],
 input[type="search"],
-input[type="tel"] {
-	padding: 13px;
-}
+input[type="tel"]
+  padding: 13px
 
-textarea {
-	overflow: auto; /* Removes default vertical scrollbar in IE6/7/8/9 */
-	padding-left: 8px;
-	vertical-align: top; /* Improves readability and alignment in all browsers */
-	width: 100%;
-}
-select {
-	border-color: #F2F2F3;
-}
+textarea
+  overflow: auto /* Removes default vertical scrollbar in IE6/7/8/9 */
+  padding-left: 8px
+  vertical-align: top /* Improves readability and alignment in all browsers */
+  width: 100%
 
+select
+  border-color: #F2F2F3
 
 embed,
 iframe,
-object {
-	max-width: 100%;
-}
-img {
-	max-width: 100%;
-	height: auto;
-}
+object
+  max-width: 100%
 
-/*scroll-up*/
-#scrollup {
-  position: fixed;
-  z-index: 999;
-  right: 25px;
-  bottom: 75px;
+img
+  max-width: 100%
+  height: auto
 
-  display: none;
-  overflow: hidden;
+.site-content
+  margin-top: 60px
+  margin-bottom: 60px
+  padding: 0 10px
+  .container
+    max-width: gridsystem-width(columns) + gutter-width
+    margin: 0 auto
+    border-left: 1px solid #f2f2f3
+    border-right: 1px solid #f2f2f3
+    border-bottom: 1px solid #f2f2f3
+    background: #fff
+    box-sizing: border-box
+    clearfix()
 
-  width: 45px;
-  height: 45px;
-
-  font-size: 40px;
-  line-height: 1;
-
-  color: #fcd088;
-  border: 1px solid #fcd088;
-  background-color: transparent;
-
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-
-  -webkit-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
-     -moz-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
-       -o-transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
-          transition: opacity 0.3s cubic-bezier(0.6, 0.04, 0.98, 0.335);
-}
-#scrollup:hover {
-  color: #fff;
-  background: #fcd088;
-}
+.content-area
+  @media md-min
+    column(main-column)
 
 @import "_extend"
 @import "_partial/preholder"
@@ -248,6 +215,7 @@ img {
 @import "_partial/content"
 @import "_partial/article"
 @import "_partial/archive"
+@import "_partial/sidebar"
 @import "_partial/highlight"
-@import "_partial/pagenav"
 @import "_partial/footer"
+@import "_partial/anchor"

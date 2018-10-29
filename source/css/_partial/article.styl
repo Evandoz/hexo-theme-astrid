@@ -1,3 +1,74 @@
+.article
+  margin-bottom: -1px
+  padding: 50px
+  background: #fff
+  box-sizing: border-box
+  border-top: 1px solid #f2f2f3
+  border-right: 1px solid #f2f2f3
+  border-bottom: 1px solid #f2f2f3
+  @media (max-width: 991px)
+    border-right: none
+  .entry-title
+    margin-top: 0
+  .entry-title,
+  .entry-title a
+    color: #272727
+  .entry-meta
+    margin-bottom: 30px
+    padding: 5px
+    border-top: 1px solid #f2f2f3
+    border-bottom: 1px solid #f2f2f3
+  .entry-footer
+    padding: 0 50px
+  .entry-meta,
+  .entry-meta a,
+  .entry-footer,
+  .entry-footer a
+    color: #a0a8ab
+  .entry-meta,
+  .entry-footer
+    font-size: 13px
+  .entry-meta span::before,
+  .entry-footer span ::before
+    font-family: 'FontAwesome'
+    margin-right: 5px
+  .entry-meta .entry-categories::before
+    content: '\f114'
+  .entry-meta .entry-comments::before
+    content: '\f0e6'
+  .entry-meta .entry-date::before
+    content: '\f073'
+  .entry-meta .entry-visitor::before
+    content: '\f06e'
+  .entry-meta .entry-tags::before
+    content: '\f02c'
+  .entry-meta span::after
+    content: '/'
+    margin: 0 15px
+  .entry-meta span:last-of-type::after
+    content: ''
+    margin: 0
+  .entry-thumb
+    padding-right: 30px
+  .entry-thumb,
+  .post-thumb
+    transition: opacity 0.4s
+  .entry-thumb:hover,
+  .post-thumb:hover
+    opacity: 0.7
+  .post-thumb
+    margin-bottom: 30px
+  .has-post-thumbnail .entry-summary,
+  .entry-thumb
+    width: 50%
+    float: left
+  .entry-thumb,
+  .entry-summary
+    margin-bottom: 30px
+  .read-more
+    clear: both
+    margin-bottom: 0
+
 /*entry-meta*/
 .entry-date
 
@@ -25,13 +96,10 @@
 
 /*entry-content*/
 .entry-content
-  @extend $base-style
   clearfix()
   padding: 0
   p, table
     line-height: 1.9
-  h1, h2, h3, h4, h5, h6
-    font-weight: bold
   h1, h2, h3, h4, h5, h6
     line-height: 1.1em
     margin: 1.1em 0
@@ -130,32 +198,6 @@
       height: 100%
       margin-top: 0
 
-/*toc*/
-.toc-article
-  border-left: rgba(88,88,88,0.1) 2px solid
-  margin: 180px auto 0
-  padding: 0 1em
-
-.toc-title
-  font-size 120%
-  &:before
-    font-family: "FontAwesome"
-    content: "\f0ca"
-    margin-right: .5em
-
-#toc
-  line-height: 1.1em
-  font-size: 1em
-  overflow: hidden
-
-.toc-fixed
-  position: fixed
-  width: inherit!important
-  top: 100px
-  margin-top: 0
-  overflow: hidden
-  z-index: 1
-
 .nav
   padding: 0
   margin: .95em
@@ -167,7 +209,11 @@
       background-color: transparent !important
   .active > a
     color: #fcd088
-
+.post-navigation
+  margin: 0
+  padding: 30px 50px
+  border-right: 1px solid #f2f2f3
+  overflow: hidden
 .nav-child
   padding-left: 16px
 

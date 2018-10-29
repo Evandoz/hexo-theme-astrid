@@ -1,0 +1,47 @@
+.top-anchor
+  display: none
+  @media md-min
+    display: block
+    position: fixed
+    right: 25px
+    bottom: 145px
+    width: 50px
+    height: 50px
+    padding: 19px 13px
+    box-sizing: border-box
+    border: 1px solid #fcd088
+    cursor: pointer
+    visibility: hidden
+    z-index: 9
+    transition:all .3s
+
+    &.on
+      visibility: visible
+      &:hover
+      &:focus
+        background: #fcd088
+        li
+          background: #333
+    ul
+      position: relative
+      height: 12px
+      width: 24px
+      margin: 0
+      padding: 0
+      list-style: none
+      li
+        position: absolute
+        width: 17px
+        height: 1px
+        list-style: none
+        background: #fcd088
+        &:first-child
+          left: 0
+          bottom: 0
+          transform-origin: 0 100%
+          transform: rotate(-45deg)
+        &:last-child
+          right: 0
+          bottom: 0
+          transform-origin: 100% 100%
+          transform: rotate(45deg)

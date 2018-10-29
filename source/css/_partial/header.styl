@@ -3,7 +3,7 @@
 .site-header
 	position: fixed
 	width: 100%
-	padding: 10px 20px
+	padding: 15px 0
 	box-sizing: border-box
 	background: #202529
 	border-bottom: 1px solid rgba(255,255,255,0.1)
@@ -13,16 +13,16 @@
 		background: transparent
 	&.header-scrolled
 		background: #202529
-		padding: 0 10px
+		padding: 5px 0
 		border-bottom: 1px solid transparent
-.container
-	display: flex
-	justify-content: space-between
-	align-items: center
-	margin: 0 auto
-	@media (min-width: 768px)
-		min-width: 750px
-		max-width: 900px
+	.container
+		display: flex
+		justify-content: space-between
+		align-items: center
+		max-width: gridsystem-width(columns) + gutter-width
+		margin: 0 auto
+		padding-left: 15px
+		padding-right: 15px
 .site-title
 	font-size: 28px
 	margin: 0

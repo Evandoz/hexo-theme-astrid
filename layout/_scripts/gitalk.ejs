@@ -1,0 +1,15 @@
+<% if ((is_post() || is_current('comments/')) && theme.gitalk.enable) { %>
+  <%- js('https://unpkg.com/gitalk/dist/gitalk.min.js') %>
+  <script type="text/javascript">
+    const gitalk = new Gitalk({
+      clientID: '<%= theme.gitalk.clientID %>',
+      clientSecret: '<%= theme.gitalk.clientSecret %>',
+      repo: '<%= theme.gitalk.repo %>',
+      owner: '<%= theme.gitalk.owner %>',
+      admin: ['<%= theme.gitalk.owner %>'],
+      id: '<%= page.path %>',
+      distractionFreeMode: true
+    })
+    gitalk.render('post-comment')
+  </script>
+<% } %>

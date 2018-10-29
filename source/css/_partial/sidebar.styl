@@ -1,0 +1,229 @@
+.widget-area
+  @media md-min
+    column(side-column)
+
+
+.widget-area .widget
+	margin-bottom: -1px
+	padding: 30px
+	color: #656D6D
+	background: #fff
+	box-sizing: border-box
+	border-top: 1px solid #f2f2f3
+	border-bottom: 1px solid #f2f2f3
+.widget-area .widget a
+	color:#656D6D
+.widget ul
+	padding: 0 0 0 20px
+.widget li
+	padding-top: 2px
+	padding-bottom: 2px
+.widget .children
+	padding-left: 20px
+.widget-area .widget,
+.widget-area .widget a
+	color: #656D6D
+.widget-area .widget-title
+	text-transform: uppercase
+	margin: 0 0 20px
+/* Make sure select elements fit in widgets. */
+.widget select
+	max-width: 100%
+/* Search widget. */
+.widget_search .search-submit
+	display: none
+/* Recent posts */
+.widget_recent_posts ul
+	list-style: none
+	padding: 0
+.widget_recent_posts li
+	padding-bottom: 15px
+.widget_recent_posts li:last-of-type
+	padding-bottom: 0
+.widget_recent_posts .recent-thumb
+	padding: 0 15px 0 0
+.widget_recent_posts .recent-title
+	padding: 0
+.widget_recent_posts .post-date
+	display: block
+	font-size: 12px
+	padding: 3px
+	margin-top: 5px
+.widget_recent_posts .post-date .fa
+	margin-right: 6px
+/* Social widget */
+.social-menu-widget
+	padding: 0 !important
+	margin: 0 auto
+	display: table
+	text-align: left
+.social-menu-widget a
+	background-color: #eaab1c
+	text-decoration: none
+	display: inline-block
+	width: 40px
+	height: 40px
+	margin: 8px
+	line-height: 40px
+	-webkit-transition: border-radius 0.4s
+	transition: border-radius 0.4s
+.social-menu-widget li a,
+.social-menu-widget li a:hover
+	color: #fff !important
+.social-menu-widget a:hover
+	border-radius: 50%
+.social-menu-widget li
+	display: inline-block
+	list-style: none
+	line-height: 1
+	text-align: center
+.social-menu-widget a:before
+	font-family: FontAwesome
+	color: inherit
+.social-menu-widget a:before
+	font-size: 20px
+
+.social-menu-widget a[href*="twitter.com"]::before
+	content: '\f099'
+.social-menu-widget a[href*="facebook.com"]::before
+	content: '\f09a'
+.social-menu-widget a[href*="plus.google.com"]::before
+	content: '\f0d5'
+.social-menu-widget a[href*="google.com/+"]::before
+	content: '\f0d5'
+.social-menu-widget a[href*="dribbble.com"]::before
+	content: '\f17d'
+.social-menu-widget a[href*="pinterest.com"]::before
+	content: '\f231'
+.social-menu-widget a[href*="youtube.com"]::before
+	content: '\f167'
+.social-menu-widget a[href*="flickr.com"]::before
+	content: '\f16e'
+.social-menu-widget a[href*="vimeo.com"]::before
+	content: '\f194'
+.social-menu-widget a[href*="instagram.com"]::before
+	content: '\f16d'
+.social-menu-widget a[href*="linkedin.com"]::before
+	content: '\f0e1'
+.social-menu-widget a[href*="foursquare.com"]::before
+	content: '\f180'
+.social-menu-widget a[href*="tumblr.com"]::before
+	content: '\f173'
+.social-menu-widget a[href*="behance.net"]::before
+	content: '\f1b4'
+.social-menu-widget a[href*="deviantart.com"]::before
+	content: '\f1bd'
+.social-menu-widget a[href*="soundcloud.com"]::before
+	content: '\f1be'
+.social-menu-widget a[href*="spotify.com"]::before
+	content: '\f1bc'
+.social-menu-widget a[href*="weibo.com"]::before
+	content: '\f18a'
+.social-menu-widget a[href*="xing.com"]::before
+	content: '\f168'
+.social-menu-widget a[href*="trello.com"]::before
+	content: '\f181'
+.social-menu-widget a[href*="skype.com"]::before
+	content: '\f17e'
+.social-menu-widget a[href*="github.com"]::before
+	content: '\f09b'
+.social-menu-widget a[href*="steampowered.com"]::before
+	content: '\f1b6'
+.social-menu-widget a[title*="Home"]::before
+	content: '\f015'
+.social-menu-widget a[title*="Linux"]::before
+	content: '\f17c'
+.social-menu-widget a[title*="QQ"]::before
+	content: '\1d6'
+.social-menu-widget a[title*="Wechat"]::before
+	content: '\1d7'
+
+/* Default widgets */
+.widget_recent_posts ul,
+.widget_archives ul,
+.widget_categories ul,
+.widget_recent_comments ul
+	list-style: none
+	padding: 0
+.widget_recent_posts li::before,
+.widget_archives li::before,
+.widget_categories li::before,
+.widget_recent_comments li::before
+	font-family: Fontawesome
+	font-size: 15px
+.widget_archives li::before
+	content: '\f133'
+	margin-right: 8px
+.widget_categories li::before
+	content: '\f114'
+	margin-right: 8px
+.widget_recent_comments li::before
+	content: '\f0e5'
+	margin-right: 8px
+.widget_tagcloud #tagcloud
+	position: relative
+	width: 280px
+	height: 240px
+	margin: 0 auto
+	text-align: center
+.widget_tagcloud #tagcloud a
+	position: absolute
+	top: 0px
+	left: 0px
+	text-decoration: none
+	margin: 0 10px 15px 0
+	line-height: 18px
+	text-align: center
+	padding: 1px 5px
+	display: inline-block
+	border-radius: 2px
+.category-list-count,
+.archive-list-count
+	padding-left: 5px
+.category-list-count::before,
+.archive-list-count::befor
+	content: "("
+.category-list-count::after,
+.archive-list-count::afte
+	content: ")"
+
+.page-header
+	border-bottom: 1px solid #F2F2F3
+	margin: 0
+	padding: 20px 60px
+.page-header .page-title
+	margin: 0
+	padding: 0
+.page-header .page-title .fa
+	margin-right: 15px
+	color: #fcd088
+
+.comment-navigation,
+.posts-navigation,
+.post-navigation
+	margin: 0
+	overflow: hidden
+	padding: 30px 60px
+
+.comment-navigation .nav-prev,
+.posts-navigation .nav-prev,
+.post-navigation .nav-prev
+	float: left
+	width: 50%
+.comment-navigation a,
+.posts-navigation a,
+.post-navigation a
+	color: #272727
+.comment-navigation a:hover,
+.posts-navigation a:hover,
+.post-navigation a:hover
+	color: #fcd088
+	text-decoration: none
+.comment-navigation .nav-next,
+.posts-navigation .nav-next,
+.post-navigation .nav-next
+	float: right
+	text-align: right
+	width: 50%
+
+

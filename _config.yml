@@ -21,6 +21,15 @@ keywords: ""
 # (E.g. `http://abc.com/favicon.ico` or `css/images/favicon.ico`)
 favicon: css/images/favicon.ico
 
+# Sidebar
+# Choose the sidebar on the left or right side
+# Add custom widgets
+sidebar: right
+widgets:
+- recent
+- social
+# - about
+
 # Social Links
 # Key is the name of social
 # Value is the target link

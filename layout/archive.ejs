@@ -1,4 +1,4 @@
 <header class="page-header">
-  <h2 class="page-title"><% if (is_month()) { %><%= __('month') %>: <%= _(page.year) %>.<%= _(page.month) %><% } else if (is_year()) { %><%= __('year') %>: <%= _(page.year) %><% } else { %><%= __('post_total_count', site.posts.length) %><% } %></h2>
+  <h1 class="page-title"><% if (is_month()) { %><%= __('month') %>: <%= _(page.year) %>.<%= _(page.month) %><% } else if (is_year()) { %><%= __('year') %>: <%= _(page.year) %><% } else { %><%= __('post_total_count', site.posts.length) %><% } %></h1>
 </header>
 <%- partial('_partial/archive', {pagination: config.archive, index: true}) %>
