@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>图的邻接表存储 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="数据结构,无向图">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Adjacency_List_Graph" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">图的邻接表存储
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">八月 26, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/数据结构/">数据结构</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>图是一种经典的数据结构，在实际的生产过程中有广泛的应用，本文将结合代码简单介绍有关图的相关基础知识点。</p>
+<a id="more"></a>
+<h2 id="图的基本概念"><a href="#图的基本概念" class="headerlink" title="图的基本概念"></a>图的基本概念</h2><hr>
+<p><strong>图</strong>(Graph)是一种较线性表和树更为复杂的结构。图有两个重要元素构成，顶点和弧边，弧边是相关顶点之间的连线，具有方向性，根据方向性的有无，图可以分为有向图和无向图。</p>
+<p>(1) 无向图。在一个图中，如果任意两个顶点构成的偶对（vi, vj）∈E 是无序的，即顶点之间的连线是没有方向的，则称该图为无向图。如下图就是一个无向图。<br>(2) 有向图。在一个图中，如果任意两个顶点构成的偶对（vi, vj）∈E 是有序的，即顶点之间的连线是有方向的，则称该图为有向图。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Graph/Graph.jpg" alt="无向图"></p>
+<h2 id="图的抽象数据类型定义"><a href="#图的抽象数据类型定义" class="headerlink" title="图的抽象数据类型定义"></a>图的抽象数据类型定义</h2><hr>
+<blockquote>
+<p>ADT  Graph{<br>数据对象：n=n是具有相同特征的数据元素集合，称为顶点集。<br>数据关系：DR={&lt;v,w&gt;|v,w∈n且&lt;v,w&gt;表示从v指向w的弧<br>}</p>
+</blockquote>
+<h2 id="图的邻接表存储代码实现"><a href="#图的邻接表存储代码实现" class="headerlink" title="图的邻接表存储代码实现"></a>图的邻接表存储代码实现</h2><hr>
+<p>邻接表是图的一种最主要存储结构，它由表头结点和表结点两部分组成，其中每个顶点均对应一个存储在数组中的表头结点。简言之，对图的每个顶点建立一个容器（n个顶点建立n个容器），第i个容器中的结点包含顶点Vi的所有邻接顶点。<br>在有向图中，描述每个点向别的节点连的边（点a-&gt;点b这种情况）；在无向图中，描述每个点所有的边(点a-点b这种情况)。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Graph/AdjacencyList.png" alt="邻接表"></p>
+<h3 id="图的顶点及弧的定义"><a href="#图的顶点及弧的定义" class="headerlink" title="图的顶点及弧的定义"></a>图的顶点及弧的定义</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAX_VERTEX_NUM 20</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VertexType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> QElemType;</span><br><span class="line"></span><br><span class="line"><span class="comment">//边表</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> adjvex; <span class="comment">//该边所指顶点位置</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">ArcNode</span> *<span class="title">nextarc</span>;</span> <span class="comment">//指向下一条弧的指针</span></span><br><span class="line">&#125; ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顶点表</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VerNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    VertexType data; <span class="comment">//顶点信息</span></span><br><span class="line">    ArcNode *firstarc; <span class="comment">//指向第一条依附该顶点的弧</span></span><br><span class="line">&#125; VerNode, AdjList[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="comment">//图定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    AdjList vertices;</span><br><span class="line">    <span class="keyword">int</span> vexnum, arcnum; <span class="comment">//图的当前顶点数和弧数</span></span><br><span class="line">    <span class="comment">//int kind; //图的种类标志</span></span><br><span class="line">&#125; ALGraph;</span><br></pre></td></tr></table></figure>
+<h3 id="图的创建"><a href="#图的创建" class="headerlink" title="图的创建"></a>图的创建</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> visit[MAX_VERTEX_NUM];</span><br><span class="line"></span><br><span class="line"><span class="comment">//节点元素定位</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocateVex</span><span class="params">(ALGraph *G, VertexType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> tmp = <span class="number">-1</span>; <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (G-&gt;vertices[i].data == e)</span><br><span class="line">        &#123;</span><br><span class="line">            tmp = i; <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> tmp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表头插</span></span><br><span class="line"><span class="function">Status <span class="title">HeadInsertArc</span><span class="params">(ALGraph *G, <span class="keyword">int</span> pos, <span class="keyword">int</span> adjvex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ArcNode *e;</span><br><span class="line">    e = (ArcNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ArcNode));</span><br><span class="line">    e-&gt;adjvex = adjvex;</span><br><span class="line">    e-&gt;nextarc = G-&gt;vertices[pos].firstarc;</span><br><span class="line">    G-&gt;vertices[pos].firstarc = e;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//邻接表尾插</span></span><br><span class="line"><span class="function">Status <span class="title">TailInsertArc</span><span class="params">(ALGraph *G, <span class="keyword">int</span> pos, <span class="keyword">int</span> adjvex)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ArcNode *e, *p;</span><br><span class="line">    e = (ArcNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ArcNode));</span><br><span class="line">    e-&gt;adjvex = adjvex;</span><br><span class="line">    e-&gt;nextarc = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">if</span> (G-&gt;vertices[pos].firstarc == <span class="literal">NULL</span>)</span><br><span class="line">        G-&gt;vertices[pos].firstarc = e;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        p = G-&gt;vertices[pos].firstarc;</span><br><span class="line">        <span class="keyword">while</span> (p-&gt;nextarc)</span><br><span class="line">            p = p-&gt;nextarc;</span><br><span class="line">        p-&gt;nextarc = e;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建图</span></span><br><span class="line"><span class="function">Status <span class="title">CreateGraph</span><span class="params">(ALGraph *G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"Please input the vexnum and arcnum:"</span>);</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d%d"</span>, &amp;(G-&gt;vexnum), &amp;(G-&gt;arcnum));</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        G-&gt;vertices[i].data = getchar();</span><br><span class="line">        G-&gt;vertices[i].firstarc = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    getchar();</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;arcnum; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">char</span> arc_s, arc_e;</span><br><span class="line">        arc_s = getchar(); arc_e = getchar();</span><br><span class="line">        <span class="keyword">int</span> v_s = LocateVex(G, arc_s);</span><br><span class="line">        <span class="keyword">int</span> v_e = LocateVex(G, arc_e);</span><br><span class="line">        <span class="comment">//HeadInsertArc(G, v_s, v_e);</span></span><br><span class="line">        <span class="comment">//HeadInsertArc(G, v_e, v_s);</span></span><br><span class="line">        TailInsertArc(G, v_s, v_e);</span><br><span class="line">        TailInsertArc(G, v_e, v_s);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="深度优先遍历"><a href="#深度优先遍历" class="headerlink" title="深度优先遍历"></a>深度优先遍历</h3><p>在G中任选一顶点v为初始出发点(源点)，则深度优先遍历可定义如下：首先访问出发点v，并将其标记为已访问过；然后依次从v出发搜索v的每个邻接点w。若w未曾访问过，则以w为新的出发点继续进行深度优先遍历，直至图中所有和源点v有路径相通的顶点(亦称为从源点可达的顶点)均已被访问为止。若此时图中仍有未访问的顶点，则另选一个尚未访问的顶点作为新的源点重复上述过程，直至图中所有顶点均已被访问为止。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//非递归</span></span><br><span class="line"><span class="function">Status <span class="title">DFS_Non_Recursion</span><span class="params">(ALGraph *G, <span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ArcNode *p;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c "</span>, G-&gt;vertices[i].data);</span><br><span class="line">    visit[i] = <span class="number">1</span>;</span><br><span class="line">    p = G-&gt;vertices[i].firstarc;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visit[p-&gt;adjvex])</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c "</span>, G-&gt;vertices[p-&gt;adjvex].data);</span><br><span class="line">            visit[p-&gt;adjvex] = <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//递归</span></span><br><span class="line"><span class="function">Status <span class="title">DFS_Recursion</span><span class="params">(ALGraph *G, <span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ArcNode *p;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%c "</span>, G-&gt;vertices[i].data);</span><br><span class="line">    p = G-&gt;vertices[i].firstarc;</span><br><span class="line">    visit[i] = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (!visit[p-&gt;adjvex])</span><br><span class="line">        &#123;</span><br><span class="line">            DFS_Recursion(G, p-&gt;adjvex);</span><br><span class="line">        &#125;</span><br><span class="line">        p = p-&gt;nextarc;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//深度优先遍历</span></span><br><span class="line"><span class="function">Status <span class="title">DFSTraverse</span><span class="params">(ALGraph *G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; i++)</span><br><span class="line">        visit[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; G-&gt;vexnum; i++)</span><br><span class="line">        <span class="keyword">if</span> (!visit[i]) DFS_Non_Recursion(G, i);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="广度优先遍历"><a href="#广度优先遍历" class="headerlink" title="广度优先遍历"></a>广度优先遍历</h3><p>从图中某个顶点V0出发，并访问此顶点；然后访问V0的各个未曾访问的邻接点W1，W2，…,Wk;然后,依次从W1,W2,…,Wk出发访问各自未被访问的邻接点；重复步骤第二个步骤，直到全部顶点都被访问为止。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//广度优先遍历</span></span><br><span class="line"><span class="function">Status <span class="title">BFSTraverse</span><span class="params">(ALGraph *G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i; LinkQueue Q;</span><br><span class="line">    InitQueue(&amp;Q); <span class="comment">//初始化队列</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G-&gt;vexnum; i++) <span class="comment">//设置所为顶点为未访问</span></span><br><span class="line">        visit[i] = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; G-&gt;vexnum; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="number">0</span> == visit[i]) <span class="comment">//选取未访问的顶点</span></span><br><span class="line">        &#123;</span><br><span class="line">            visit[i] = <span class="number">1</span>; <span class="comment">//未访问,则(只)访问一次</span></span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"%c "</span>, G-&gt;vertices[i].data);</span><br><span class="line">            EnQueue(&amp;Q, i); <span class="comment">//已访问则进队</span></span><br><span class="line">            <span class="keyword">while</span> (!QueueEmpty(&amp;Q)) <span class="comment">//队列不为空</span></span><br><span class="line">            &#123;</span><br><span class="line">                DeQueue(&amp;Q, &amp;i); <span class="comment">//出队</span></span><br><span class="line">                ArcNode *p = G-&gt;vertices[i].firstarc; <span class="comment">//指向下一个边表结点</span></span><br><span class="line">                <span class="keyword">while</span> (p)</span><br><span class="line">                &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!visit[p-&gt;adjvex]) <span class="comment">//未访问结点</span></span><br><span class="line">                    &#123;</span><br><span class="line">                        visit[p-&gt;adjvex] = <span class="number">1</span>;</span><br><span class="line">                        <span class="built_in">printf</span>(<span class="string">"%c "</span>, G-&gt;vertices[p-&gt;adjvex].data);</span><br><span class="line">                        EnQueue(&amp;Q, p-&gt;adjvex);</span><br><span class="line">                    &#125;</span><br><span class="line">                    p = p-&gt;nextarc; <span class="comment">//下一个边表结点</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码可参见：<a href="https://github.com/Laueray/Data-Structure/tree/master/5.Graph" rel="external nofollow noopener noreferrer" target="_blank">GitHub</a></p>
+<p> <strong>DONE！</strong><br>所示代码如有错误请多加指正，谢谢</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/无向图/">无向图</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/Travis_CI_Hexo/" rel="prev">上篇：使用 Travis CI 自动部署 Hexo</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/SqQueue_LinkQueue/" rel="next">下篇：顺序队列与链队列的实现</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

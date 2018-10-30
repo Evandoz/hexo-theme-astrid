@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>使用 Travis CI 自动部署 Hexo | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Travis CI自动部署工具,Hexo,自动部署Hexo到GitHub">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Travis_CI_Hexo" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">使用 Travis CI 自动部署 Hexo
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">八月 27, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/Hexo/">Hexo</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>由于<code>Hexo</code>系统本身的特性，每次都需要手动更新部署网站，于是拟利用软件开发中的持续集成工具<code>Travis CI</code>来帮助完成这一繁杂过程。</p>
+<a id="more"></a>
+<h2 id="Travis-CI"><a href="#Travis-CI" class="headerlink" title="Travis CI"></a>Travis CI</h2><hr>
+<p>CI是<code>Continuous Integration</code>的缩写，持续集成之意。</p>
+<blockquote>
+<p>持续集成是一种软件开发实践，每次集成都通过自动化的构建（包括编译，发布，自动化测试）来验证，从而尽早地发现集成错误。</p>
+</blockquote>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Continuous.png" alt="Continuous Integration"></p>
+<p>Travis CI 是目前新兴的开源持续集成构建项目，用来构建托管在<code>GitHub</code>上的代码。它提供了多种编程语言的支持，包括Ruby，JavaScript，Java，Scala，PHP，Haskell和Erlang在内的多种语言。许多知名的开源项目使用它来在每次提交的时候进行构建测试，比如Ruby on Rails，Ruby和Node.js。</p>
+<blockquote>
+<p>Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。</p>
+</blockquote>
+<h2 id="工作原理"><a href="#工作原理" class="headerlink" title="工作原理"></a>工作原理</h2><hr>
+<p>当我们每次进行<code>push</code>等动作时，Travis CI 会自动检测我们的提交，然后根据配置文件，搭建虚拟主机来运行测试，构建等指令。在这里，就是运行<code>hexo g d</code>等命令来自动生成、部署静态网页。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis.png" alt="Travis CI"></p>
+<p>Travis CI 官方文档：<a href="https://docs.travis-ci.com/" rel="external nofollow noopener noreferrer" target="_blank">https://docs.travis-ci.com/</a></p>
+<h2 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h2><hr>
+<h3 id="Hexo-搭建"><a href="#Hexo-搭建" class="headerlink" title="Hexo 搭建"></a>Hexo 搭建</h3><p>这里使用<code>Hexo</code>+<code>Next</code>+<code>GitHub Pages</code>组合示范过程，具体过程不再赘述。网站源码放到<code>Hexo</code>分支，博客的静态文件部署到<code>master</code>分支。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis001.png" alt="hexo源代码"></p>
+<h3 id="设置-Travis-CI"><a href="#设置-Travis-CI" class="headerlink" title="设置 Travis CI"></a>设置 Travis CI</h3><p>登陆 Travis CI，使用 GitHub 账户登录，它会自动关联 GitHub 上的仓库。点击右上角用户查看 GitHub 仓库，并选择要启动的项目，这里选择<code>yourname/yourname.github.io</code>。</p>
+<p>点击设置按钮，进入设置选项，开启相关服务，<code>Build only if .travis.yml is present</code>：指只在有<code>.travis.yml</code>时改变了才构建；<code>Build pushes</code>：push 完分支后开始构建。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis005.png" alt="设置"></p>
+<p>访问仓库是需要权限的，下面配置权限信息。</p>
+<h3 id="配置-Acess-Token"><a href="#配置-Acess-Token" class="headerlink" title="配置 Acess Token"></a>配置 Acess Token</h3><p>登陆<a href="https://github.com" rel="external nofollow noopener noreferrer" target="_blank">GitHub</a>，进入设置界面，在<code>Personal access tokens</code>页面下点击右上角的<code>Generate new token</code>按钮会生成新的<code>token</code>，随后输入密码，取个名字，勾选一些权限</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis006.png" alt="Personal access tokens"></p>
+<p>为了保护 token 的私密性，将其配置到 Travis CI 的<code>Environment Variables</code>。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis008.png" alt="Environment Variables"></p>
+<p>Travis CI 已获得仓库权限，现在可以给它相关操作指令了。</p>
+<h3 id="配置-travis-yml"><a href="#配置-travis-yml" class="headerlink" title="配置 .travis.yml"></a>配置 .travis.yml</h3><p><em>.travis.yml</em> 内容如下：</p>
+<pre><code>language: node_js  #设置语言
+
+node_js: stable  #设置相应的版本
+
+install:
+  - npm install  #安装hexo及插件
+
+script:
+  - hexo cl  #清除
+  - hexo g  #生成
+
+after_script:
+  - cd ./public
+  - git init
+  - git config user.name &quot;yourname&quot;  #修改name
+  - git config user.email &quot;your email&quot;  #修改email
+  - git add .
+  - git commit -m &quot;update&quot;
+  - git push --force --quiet &quot;https://${GH_TOKEN}@${GH_REF}&quot; master:master  #GH_TOKEN是在Travis中配置token的名称
+
+branches:
+  only:
+    - hexo  #只监测hexo分支，hexo是我的分支的名称，可根据自己情况设置
+env:
+ global:
+   - GH_REF: github.com/yourname/yourname.github.io.git  #设置GH_REF，注意更改yourname
+</code></pre><p>当然，为了个人隐私方面的考虑，<em>.travis.yml</em> 文件中的用户名、邮箱之类的变量也可以像 GH_TOKEN 一样定义在 Environment Variables 中。</p>
+<p>需要注意一个问题是，创建虚拟机后，Travis 会使用<code>npm install</code>命令读取 package.json 文件来安装 Hexo 及其依赖文件，因此需要保证 package.json 文件不可少且相关的依赖文件都在其中有记录。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis009.png" alt="package.json"></p>
+<p>配置Hexo时会生成<code>node_modules</code>文件夹，这是 Hexo 及其依赖包的位置，它和 <em>package.json</em> 文件列表是对应的。因此 node_modules 文件夹不需要 push 远程仓库，CI平台的虚拟机会自己创建的。</p>
+<p>另外注意这些文件的<strong>格式</strong>，尤其是<code>.yml</code>的格式，稍有偏差就有可能出问题。</p>
+<h3 id="Push-到-GitHub"><a href="#Push-到-GitHub" class="headerlink" title="Push 到 GitHub"></a>Push 到 GitHub</h3><p>在本地_posts目录下新建文章并 push 分支，登陆 Travis CI 即可看到已经检测到分支变化并开始构建，其中<code>job log</code>记录了构建的过程。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis013.png" alt="hexo deployer"></p>
+<p>自动部署完成，打开网页查看效果</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Travis/Travis015.png" alt="post"></p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a href="http://lotabout.me/2016/Hexo-Auto-Deploy-to-Github/" rel="external nofollow noopener noreferrer" target="_blank">Hexo 自动部署到 Github</a></li>
+<li><a href="http://blog.csdn.net/woblog/article/details/51319364" rel="external nofollow noopener noreferrer" target="_blank">手把手教你使用Travis CI自动部署你的Hexo博客到Github上</a></li>
+<li><a href="http://gold.xitu.io/entry/570de1f32e958a0069d567f6" rel="external nofollow noopener noreferrer" target="_blank">使用 travis-ci 自动部署 hexo 博客</a></li>
+</ul>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/Hexo/">Hexo</a></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/Travis-CI/">Travis CI</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/CSS_Association_CSS_Selector/" rel="prev">上篇：CSS 引入方式与选择器</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/Adjacency_List_Graph/" rel="next">下篇：图的邻接表存储</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

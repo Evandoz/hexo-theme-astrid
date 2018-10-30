@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>汇编语言实现冒泡排序 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="冒泡排序,汇编编程">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="BubbleSort_x86Assembly" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">汇编语言实现冒泡排序
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">十月 28, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/汇编编程/">汇编编程</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>8086 汇编是一种经典的底层语言，本文将结合代码介绍使用汇编语言来实现冒泡排序。</p>
+<a id="more"></a>
+<h2 id="题目要求"><a href="#题目要求" class="headerlink" title="题目要求"></a>题目要求</h2><hr>
+<p>数据区存放一组数据，要求采用冒泡法对数据区的数据按递增排序，并且从最后一位开始向前比较，排序完成后把数据按排序后的递增顺序放回。</p>
+<h2 id="设计思路"><a href="#设计思路" class="headerlink" title="设计思路"></a>设计思路</h2><hr>
+<p>冒泡排序在高级语言中同时要使用双重循环，这里也不例外。因此一层一层的来。</p>
+<p>先实现<strong>内层循环</strong>，即一个一个相邻的数进行比较，该调换顺序的调换顺序，不用调换的直接进行下一位比较，具体看代码中<strong>SORT..LOOP</strong>部分。</p>
+<p>再实现<strong>外层循环</strong>，根据冒泡排序，每进行一次内层循环，就会有一个最小的数到达它该到达的位置，这样一来下一趟排序循环的次数就减一，于是在外层循环中我们就控制内层循环的次数<strong>(CX)</strong>，内层循环进行一次退出后，在外层循环将循环次数减一<strong>(DEC CX)</strong>再让其进入循环，直到循环次数为 0 <strong>(CMP CX, 0)</strong>退出。另外还有一个要保存的是每次循环开始的位置<strong>(PUSH SI)</strong>。</p>
+<h2 id="参考代码"><a href="#参考代码" class="headerlink" title="参考代码"></a>参考代码</h2><hr>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">DATA 	<span class="meta">SEGMENT</span></span><br><span class="line">        ORG	<span class="number">3000H</span></span><br><span class="line">        COUNT <span class="built_in">EQU</span> <span class="number">6</span></span><br><span class="line">        <span class="keyword">STR</span> <span class="built_in">DB</span> <span class="number">12H</span>, <span class="number">78H</span>, <span class="number">62H</span>, <span class="number">50H</span>, <span class="number">22H</span>, <span class="number">33H</span></span><br><span class="line">DATA	ENDS</span><br><span class="line">CODE	<span class="meta">SEGMENT</span></span><br><span class="line">        <span class="meta">ASSUME</span> <span class="built_in">DS</span>:DATA, <span class="built_in">CS</span>:CODE</span><br><span class="line"><span class="symbol">START:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AX</span>, DATA</span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DS</span>, <span class="built_in">AX</span>		<span class="comment">;装载段地址</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">SI</span>, OFFSET <span class="keyword">STR</span>	<span class="comment">;偏移地址</span></span><br><span class="line">        <span class="keyword">ADD</span> <span class="built_in">SI</span>, COUNT</span><br><span class="line">        <span class="keyword">DEC</span> <span class="built_in">SI</span>		<span class="comment">;跳到最后一个位置，这里是实验题目要求，不要奇怪博主为何从后往前比较</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">CX</span>, COUNT</span><br><span class="line"></span><br><span class="line"><span class="symbol">W:</span>					<span class="comment">;外层循环开始</span></span><br><span class="line">        <span class="keyword">PUSH</span> <span class="built_in">CX</span>		<span class="comment">;保存一趟排序要比较的次数，即循环次数，下一趟排序时减一</span></span><br><span class="line">        <span class="keyword">PUSH</span> <span class="built_in">SI</span>		<span class="comment">;保存一趟排序开始的位置，需要保持不变</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">SORT:</span>				<span class="comment">;内层循环开始，一趟排序开始</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">BL</span>, [<span class="built_in">SI</span>]</span><br><span class="line">        <span class="keyword">CMP</span> <span class="built_in">BL</span>, [<span class="built_in">SI</span>-<span class="number">1</span>] 		<span class="comment">;当前位置与其下一个位置比较</span></span><br><span class="line">        <span class="keyword">JB</span>  A</span><br><span class="line">        <span class="keyword">JMP</span> B</span><br><span class="line"></span><br><span class="line"><span class="symbol">	A:</span></span><br><span class="line">        <span class="keyword">XCHG</span> <span class="built_in">BL</span>, [<span class="built_in">SI</span>-<span class="number">1</span>] 	<span class="comment">;当前位置比下一位小，交换</span></span><br><span class="line">        <span class="keyword">MOV</span>  [<span class="built_in">SI</span>], <span class="built_in">BL</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">	B:</span></span><br><span class="line">        <span class="keyword">DEC</span>  <span class="built_in">SI</span></span><br><span class="line">        <span class="keyword">LOOP</span> SORT	<span class="comment">;内层循环结束，一趟排序结束</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">POP</span> <span class="built_in">SI</span>		<span class="comment">;恢复排序开始位置</span></span><br><span class="line">        <span class="keyword">POP</span> <span class="built_in">CX</span></span><br><span class="line">        <span class="keyword">DEC</span> <span class="built_in">CX</span>		<span class="comment">;下一趟循环，比较次数减一</span></span><br><span class="line">        <span class="keyword">CMP</span> <span class="built_in">CX</span>, <span class="number">0</span>	<span class="comment">;CX大于0，说明还需要继续冒泡</span></span><br><span class="line">        <span class="keyword">JA</span>  W</span><br><span class="line">        <span class="keyword">JMP</span> EXIT	<span class="comment">;外层循环结束</span></span><br><span class="line"></span><br><span class="line"><span class="symbol">EXIT:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="number">AH</span>, <span class="number">4CH</span></span><br><span class="line">        <span class="keyword">INT</span> <span class="number">21H</span>		<span class="comment">;返回系统</span></span><br><span class="line"></span><br><span class="line">CODE	ENDS</span><br><span class="line">        END 	START</span><br></pre></td></tr></table></figure>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/冒泡排序/">冒泡排序</a></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/汇编/">汇编</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/Conversion/" rel="prev">上篇：汇编语言实现进制转换</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/Addressing_Mode_of_8086/" rel="next">下篇：8086 指令系统寻址</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>顺序栈与链栈的实现 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="数据结构,栈">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="SqStack_LinkStack" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">顺序栈与链栈的实现
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">七月 06, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/数据结构/">数据结构</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>栈是一种经常使用的数据结构，软硬件学习过程中都有它的身影，是一种必须掌握的数据结构，本文将结合代码简单两种栈的实行方式。</p>
+<a id="more"></a>
+<h2 id="栈的定义"><a href="#栈的定义" class="headerlink" title="栈的定义"></a>栈的定义</h2><p>栈(Stack)是限定仅在表尾进行插入与删除操作的线性表。于是栈也有两种实现方式，顺序栈和链栈。</p>
+<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><hr>
+<h3 id="顺序栈-SqStack"><a href="#顺序栈-SqStack" class="headerlink" title="顺序栈(SqStack)"></a>顺序栈(SqStack)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACK_INIT_SIZE 100</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> STACKINCREMENT 10</span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> SElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"></span><br><span class="line"><span class="comment">//顺序栈定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SElemType *top; <span class="comment">//栈顶指针</span></span><br><span class="line">    SElemType *base; <span class="comment">//在栈构造之前和销毁之后为NULL</span></span><br><span class="line">    <span class="keyword">int</span> stacksize; <span class="comment">//当前已分配大小</span></span><br><span class="line">&#125;SqStack;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    S-&gt;base = (SElemType *)<span class="built_in">malloc</span>(STACK_INIT_SIZE*<span class="keyword">sizeof</span>(SElemType));</span><br><span class="line">    <span class="keyword">if</span> (!S-&gt;base) <span class="keyword">return</span> ERROR;</span><br><span class="line">    S-&gt;top = S-&gt;base;</span><br><span class="line">    S-&gt;stacksize = STACK_INIT_SIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//判空</span></span><br><span class="line"><span class="function">Status <span class="title">StackEmpty</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (S-&gt;top == S-&gt;base)</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//栈满</span></span><br><span class="line"><span class="function">Status <span class="title">StackFull</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (S-&gt;top - S-&gt;base &gt;= S-&gt;stacksize)</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//栈顶</span></span><br><span class="line"><span class="function">Status <span class="title">GetTop</span><span class="params">(SqStack *S, SElemType* e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (StackEmpty(S))</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    (*e) = *(S-&gt;top - <span class="number">1</span>);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//压栈</span></span><br><span class="line"><span class="function">Status <span class="title">PushStack</span><span class="params">(SqStack *S, SElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (StackFull(S))</span><br><span class="line">    &#123;</span><br><span class="line">        S-&gt;base = (SElemType *)<span class="built_in">realloc</span>(S-&gt;base,</span><br><span class="line">            (S-&gt;stacksize + STACKINCREMENT)*<span class="keyword">sizeof</span>(SElemType));</span><br><span class="line">        <span class="keyword">if</span> (!S-&gt;base) <span class="keyword">return</span> ERROR;</span><br><span class="line">        S-&gt;top = S-&gt;base + S-&gt;stacksize;</span><br><span class="line">        S-&gt;stacksize += STACKINCREMENT;</span><br><span class="line">    &#125;</span><br><span class="line">    *(S-&gt;top++) = e;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//弹栈</span></span><br><span class="line"><span class="function">Status <span class="title">PopStack</span><span class="params">(SqStack *S, SElemType* e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (StackEmpty(S)) <span class="keyword">return</span> ERROR;</span><br><span class="line">    (*e) = *(--S-&gt;top);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//清空</span></span><br><span class="line"><span class="function">Status <span class="title">ClearStack</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    S-&gt;top = S-&gt;base;</span><br><span class="line">    S-&gt;stacksize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//销毁</span></span><br><span class="line"><span class="function">Status <span class="title">DestroyStack</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">free</span>(S-&gt;base);</span><br><span class="line">    S-&gt;top = <span class="literal">NULL</span>;</span><br><span class="line">    S-&gt;base = <span class="literal">NULL</span>;</span><br><span class="line">    S-&gt;stacksize = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//长度</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Length</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> S-&gt;top - S-&gt;base;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历栈</span></span><br><span class="line"><span class="function">Status <span class="title">Traverse</span><span class="params">(SqStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SElemType *p;</span><br><span class="line">    p = S-&gt;top - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &gt;= S-&gt;base)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, *p);</span><br><span class="line">        p--;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码可参见：<a href="https://github.com/Evandoz/Data-Structure/blob/master/2.Stack/SqStack.c" rel="external nofollow noopener noreferrer" target="_blank">GitHub</a></p>
+<h3 id="链栈-LinkStack"><a href="#链栈-LinkStack" class="headerlink" title="链栈(LinkStack)"></a>链栈(LinkStack)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> OK 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> ERROR 0</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> SElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"></span><br><span class="line"><span class="comment">//栈节点定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">SNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">SNode</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;SNode, *LinkStack;</span><br><span class="line"></span><br><span class="line"><span class="comment">//初始化</span></span><br><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(LinkStack *S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    *S = (SNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(SNode));</span><br><span class="line">    <span class="keyword">if</span> (!(*S)) <span class="keyword">return</span> ERROR;</span><br><span class="line">    (*S)-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//栈空</span></span><br><span class="line"><span class="function">Status <span class="title">StackEmpty</span><span class="params">(LinkStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (!S-&gt;next)</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">    <span class="keyword">return</span> ERROR;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//压栈</span></span><br><span class="line"><span class="function">Status <span class="title">PushStack</span><span class="params">(LinkStack S, SElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SNode *p;</span><br><span class="line">    p = (SNode *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(SNode));</span><br><span class="line">    <span class="keyword">if</span> (!p) <span class="keyword">return</span> ERROR;</span><br><span class="line">    p-&gt;data = e;</span><br><span class="line">    p-&gt;next = S-&gt;next;</span><br><span class="line">    S-&gt;next = p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//弹栈</span></span><br><span class="line"><span class="function">Status <span class="title">PopStack</span><span class="params">(LinkStack S, SElemType *e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SNode *p;</span><br><span class="line">    <span class="keyword">if</span> (StackEmpty(S))</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    p = S-&gt;next;</span><br><span class="line">    S-&gt;next = p-&gt;next;</span><br><span class="line">    (*e) = p-&gt;data;</span><br><span class="line">    <span class="built_in">free</span>(p);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//遍历栈</span></span><br><span class="line"><span class="function">Status <span class="title">Traverse</span><span class="params">(LinkStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    SNode *p;</span><br><span class="line">    p = S-&gt;next;</span><br><span class="line">    <span class="keyword">while</span> (p)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>, p-&gt;data);</span><br><span class="line">        p=p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>完整代码可参见：<a href="https://github.com/Evandoz/Data-Structure/blob/master/2.Stack/LinkStack.c" rel="external nofollow noopener noreferrer" target="_blank">GitHub</a></p>
+<p><strong>DONE！</strong><br>所示代码如有错误请多加指正，谢谢</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/栈/">栈</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/BiTree/" rel="prev">上篇：二叉树的实现与操作</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/LinkList/" rel="next">下篇：链表的实现与操作</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>8086 指令系统寻址 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="指令系统,寻址方式">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Addressing_Mode_of_8086" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">8086 指令系统寻址
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">十月 18, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/汇编编程/">汇编编程</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>Intel 8086 是因特尔早期研制的一款16位经典微处理器芯片，是x86架构的鼻祖。<br>为深入学习该系列处理器汇编语言，本文将总结 8086 指令系统的寻址方式。</p>
+<a id="more"></a>
+<h2 id="寻址与指令"><a href="#寻址与指令" class="headerlink" title="寻址与指令"></a>寻址与指令</h2><hr>
+<blockquote>
+<p>寻址方式（Addressing Mode）是确定<strong>当前指令操作数地址</strong>以及<strong>下一条要执行指令地址</strong>的方法。</p>
+</blockquote>
+<p>简单说就是在指令中操作数和下一条指令（地址）是如何获取的，是直接给出，还是给出提示信息去查找。</p>
+<h2 id="数据寻址"><a href="#数据寻址" class="headerlink" title="数据寻址"></a>数据寻址</h2><hr>
+<h3 id="立即寻址"><a href="#立即寻址" class="headerlink" title="立即寻址"></a>立即寻址</h3><p>操作数直接放在指令的操作数码段中，故立即寻址<strong>不会访问寄存器，存储器</strong>，指令执行速度快。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive002.png" alt="立即寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov al, <span class="number">5</span>	;执行结果：(al) = <span class="number">5</span>      [<span class="string">"()"</span>表示取内容，以下皆如此]</span><br></pre></td></tr></table></figure>
+<h3 id="寄存器寻址"><a href="#寄存器寻址" class="headerlink" title="寄存器寻址"></a>寄存器寻址</h3><p>操作数存放在寄存器中，而在指令中给出寄存器的标号，指令执行时会到这个寄存器中取出相应的操作数，即访问寄存器，不访问存储器，速度也很快。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive003.png" alt="寄存器寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">mov</span> <span class="built_in">ax</span>, <span class="built_in">bx</span>	<span class="comment">;假设(bx) = 30H，则执行结果为：(ax) = 30H</span></span><br></pre></td></tr></table></figure>
+<h3 id="存储器寻址说明"><a href="#存储器寻址说明" class="headerlink" title="存储器寻址说明"></a>存储器寻址说明</h3><p><strong>1.有效地址</strong></p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">有效地址（EA）= 位移量<span class="comment">(disp)</span> + 基址<span class="comment">(base)</span> + 变址<span class="comment">(index)</span></span><br></pre></td></tr></table></figure>
+<p>位移量：存放在指令中的数，但它不是立即数，而是一个<code>地址</code>，可以用变量或标号表示。<br>基址：存放在基址寄存器(BX、BP)中，有效地址的基址部分。<br>变址：存放在变址寄存器(SI、DI)中，有效地址的变址部分。</p>
+<p><strong>2.段前缀使用规则</strong></p>
+<p>8086 允许程序员用段跨越前缀来改变系统所指定的默认段，如：允许数据存放在 DS 以外的段中，使用时指明段前缀，但是有些情况是不可以修改的。</p>
+<p>(1) 串处理操作中<strong>目的串</strong>必须用 ES 段，即默认为 ES:DI，不可修改。<br>(2) <strong>压栈</strong>（push）、<strong>弹栈</strong>（pop）必须使用 SS 段，即默认为 SS:SP 不可修改。<br>(3) <strong>指令</strong>必须存放在 CS段 中。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">访存类型</th>
+<th style="text-align:center">所用段及段寄存器</th>
+<th style="text-align:center">缺省时使用规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">指针</td>
+<td style="text-align:center">代码段 CS</td>
+<td style="text-align:center">取指</td>
+</tr>
+<tr>
+<td style="text-align:center">堆栈</td>
+<td style="text-align:center">堆栈段 SS</td>
+<td style="text-align:center">所有的堆栈操作/任何用 BP 作为基址寄存器的访存</td>
+</tr>
+<tr>
+<td style="text-align:center">局部数据</td>
+<td style="text-align:center">数据段 DS</td>
+<td style="text-align:center">除堆栈以及串处理操作中目的串以外的数据访问</td>
+</tr>
+<tr>
+<td style="text-align:center">目的串</td>
+<td style="text-align:center">附加段 ES</td>
+<td style="text-align:center">串处理操作中的目的串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="直接寻址"><a href="#直接寻址" class="headerlink" title="直接寻址"></a>直接寻址</h3><p>操作数的有效地址只包含位移量一种成分，有效地址 = 位移量 ，而位移量就存放在指令的操作数码段中。<br><strong>注意</strong>：<br>1、为了防止指令字过长，规定双操作数指令中的两个操作数中，只能有一个使用存储器寻址方式。<br>2、注意区分有效地址别称 — <strong>偏移地址</strong>（Offset Address）与<strong>位移量</strong>（displacement），这是两个概念。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive004.png" alt="直接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, [<span class="number">2000</span>H]		;假设 (ds) = <span class="number">3000</span>H ，则执行结果为：(ax) = (<span class="number">32000</span>) ，即取出存储单元 <span class="number">32000</span>H<span class="number">-32001</span>H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
+<p>位移量可以像高级语言一样用变量表示，而且还可以为这个位移量指定段前缀。</p>
+<h3 id="寄存器间接寻址"><a href="#寄存器间接寻址" class="headerlink" title="寄存器间接寻址"></a>寄存器间接寻址</h3><p>操作数在存储器中，而其有效地址存放在某个寄存器中，可用寄存器有 BX、BP、SI、DI。</p>
+<p>区别于寄存器寻址，前者操作数存放在寄存器中，在指令中存放相应的寄存器号码，不需要访存；后者的寄存器存放操作数的有效地址，而操作数本身在存储器中。指令要先通过该寄存器获取操作数有效地址，在通过该地址访存获取操作数。<br>同样也可以为其指定其他段前缀。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive005.png" alt="寄存器间接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax，[bx]	;假设 (ds) = <span class="number">2000</span>H，(bx) = <span class="number">1000</span>H ，则执行结果为：(ax) = (<span class="number">21000</span>) ，即取出存储单元 <span class="number">21000</span>H<span class="number">-21001</span>H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
+<h3 id="寄存器相对寻址"><a href="#寄存器相对寻址" class="headerlink" title="寄存器相对寻址"></a>寄存器相对寻址</h3><p>操作数有效地址等于寄存器内容与指令中指定位移量之和，可使用寄存器有 BX、BP、SI、DI。与寄存器间接寻址相比，指令中多了位移量。</p>
+<p>有效地址（EA）= 基址/变址 + 位移量。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive006.png" alt="寄存器相对寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, count[si]/[count+si]	;假设 (ds) = <span class="number">3000</span>H ，(si) = <span class="number">2000</span>H ，count = <span class="number">3000</span>H ，则执行结果为：(ax) = (<span class="number">35000</span>H)，即取出存储单元 <span class="number">35000</span>H<span class="number">-35001</span>H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
+<h3 id="基址变址寻址"><a href="#基址变址寻址" class="headerlink" title="基址变址寻址"></a>基址变址寻址</h3><p>操作数有效地址等于基址寄存器与变址寄存器内容之和，可使用寄存器有 BX、BP、SI、DI。</p>
+<p>有效地址（EA）= 基址 + 变址。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive007.png" alt="基址变址寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, [<span class="string">bx</span>][<span class="symbol">di</span>]/[bx+di]	;假设 (ds) = 2100H ，(bx) = 0158H ，(di) = 10A5H ，则执行结果为：(ax) = (221FDH)，即取出存储单元 221FDH-221FEH 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
+<h3 id="相对基址变址寻址"><a href="#相对基址变址寻址" class="headerlink" title="相对基址变址寻址"></a>相对基址变址寻址</h3><p>操作数有效地址是基址寄存器与变址寄存器的内容和指令中指定的位移量之和。相比前面多了位移量，而寻址方式命名中多了相对二字。</p>
+<p>有效地址（EA）= 基址 + 变址 + 位移量</p>
+<p><strong>总结</strong>：<br>(1) 只有<strong>位移量</strong>一项时叫<strong>直接寻址</strong>，除位移量外，还有其他项的叫做<strong>相对XX寻址/XX相对寻址</strong>。<br>(2) 存储器寻址可以使用的寄存器只有四个，因为要存放的都是地址。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive008.png" alt="相对基址变址寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mov ax, count[<span class="string">bx</span>][<span class="symbol">si</span>]/[count+bx+si]		;假设 (ds) = 3000H ，(bx) = 2000H ，(si) = 1000H ，count = 0250H ，则执行结果为：(ax) = (33250H)，即取出存储单元 33250H-33251H 位置的值赋给 ax</span><br></pre></td></tr></table></figure>
+<p><strong>应用</strong>：<br>这种寻址方式通常用于对二维数组的寻址。也为堆栈处理提供了方便，一般(BP)可指向栈顶，从栈顶到数组的首地址可用位移量表示，变址寄存器可用来访问数组中的某个元素。</p>
+<h2 id="转移寻址"><a href="#转移寻址" class="headerlink" title="转移寻址"></a>转移寻址</h2><hr>
+<p><strong>段内与段间</strong>：两者区别就在于地址跳转时是否跨越当前段范围，段内就是不跨越，相应的段跨越前缀就不用修改，只需要修改偏移量；段间需要跨越段范围，段跨越前缀要和偏移量同时修改。</p>
+<p><strong>直接与间接</strong>：前者指直接给出即将跳转地址与当前地址（段跨越前缀的偏移和有效地址的偏移）之差，而后者需要通过像数据相关寻址一样间接获取这个差值。</p>
+<h3 id="段内直接寻址"><a href="#段内直接寻址" class="headerlink" title="段内直接寻址"></a>段内直接寻址</h3><p>转向的有效地址是当前IP寄存器的内容和指令中指定的8位或16位位移量之和，所以它是一种相对寻址方式。<br>指令中的位移量是转向的有效地址与当前 IP 值之差，所以当这一程序段在内存中的不同区域运行时，这种寻址方式的转移指令本身不会发生变化，这是符合程序的再定位要求的。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive009.png" alt="段内直接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp</span> <span class="built_in">near</span> <span class="built_in">ptr</span> progia</span><br><span class="line"><span class="keyword">jmp</span> short quest</span><br></pre></td></tr></table></figure>
+<p>其中，progia和quest均为转向的符号地址，在机器指令中，用位移量来表示。<br>在汇编指令中，如果位移量为16位，则在符号地址前加操作符near ptr，如果位移量为8位，则在符号地址前加操作符SHORT。<br>条件转移指令只能使用段内直接寻址的8位位移量。</p>
+<h3 id="段内间接寻址"><a href="#段内间接寻址" class="headerlink" title="段内间接寻址"></a>段内间接寻址</h3><p>转向有效地址是一个寄存器或存储单元的内容。(这个寄存器或存储单元的内容可以用数据寻址方式中除立即数以外的任何一种寻址方式取得)，所得到的转向的有效地址用来取代IP寄存器的内容。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive010.png" alt="段内间接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp</span> <span class="built_in">bx</span></span><br><span class="line"><span class="keyword">jmp</span> <span class="built_in">word</span> <span class="built_in">ptr</span>[<span class="built_in">bp</span>+table]</span><br></pre></td></tr></table></figure>
+<h3 id="段间直接寻址"><a href="#段间直接寻址" class="headerlink" title="段间直接寻址"></a>段间直接寻址</h3><p>在指令中直接提供了转向段地址和偏移地址，所以只要用指令中指定的偏移地址取代IP寄存器的内容，用指令中指定的段地址取代CS寄存器的内容就完成了从一个段到另一个段的转移操作。</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive011.png" alt="段间直接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp</span> <span class="built_in">far</span> <span class="built_in">ptr</span> next	<span class="comment">;next 为转向的符号地址，far ptr 则是表示段间转移的操作符。</span></span><br></pre></td></tr></table></figure>
+<h3 id="段间间接寻址"><a href="#段间间接寻址" class="headerlink" title="段间间接寻址"></a>段间间接寻址</h3><p>用存储器中的两个相继字的内容来取代IP和CS寄存器中的原始内容，以达到段间转移的目的。(这里，存储单元的地址是由指令指定除立即数方式和寄存器方式以外的任何一种数据寻址方式取得)</p>
+<p>图形示意：</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Directive/directive012.png" alt="段间间接寻址"></p>
+<p>代码示意：</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">jmp</span> <span class="built_in">dword</span> <span class="built_in">ptr</span>[inters+<span class="built_in">bx</span>]</span><br></pre></td></tr></table></figure>
+<p>其中，[inters+bx]说明数据寻址方式为寄存器相对寻址方式，dword ptr为双字操作符，说明转向地址需取双字为段间转移指令。依次作为IP和CS的值。</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/汇编/">汇编</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/BubbleSort_x86Assembly/" rel="prev">上篇：汇编语言实现冒泡排序</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/Sublime_Text_Plugins/" rel="next">下篇：Sublime Text 3 插件推荐与介绍</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

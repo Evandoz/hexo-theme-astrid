@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>配置Python 2.7连接MySQL中的问题 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="Python,MySQL">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="MySQL_Python" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">配置Python 2.7连接MySQL中的问题
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">四月 03, 2017</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/Python/">Python</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>问题出现在使用Django(Python 2.7 64 Bit)构建Web应用的过程中，由于使用MySQL作为数据库，所以需要安装Python与MySQL连接的中间件MySQL-Python。</p>
+<a id="more"></a>
+<h2 id="缺少MySQLdb模块"><a href="#缺少MySQLdb模块" class="headerlink" title="缺少MySQLdb模块"></a>缺少MySQLdb模块</h2><p>没有安装该中间件会报错缺少MySQLdb的模块</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django<span class="selector-class">.core</span><span class="selector-class">.exceptions</span><span class="selector-class">.ImproperlyConfigured</span>: Error loading MySQLdb module: No module named MySQLdb</span><br></pre></td></tr></table></figure>
+<h2 id="命令行安装MySQL-Python"><a href="#命令行安装MySQL-Python" class="headerlink" title="命令行安装MySQL-Python"></a>命令行安装MySQL-Python</h2><p>根据提示及网上建议，使用pip来安装该模块</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip <span class="keyword">install</span> MySQL-python</span><br></pre></td></tr></table></figure>
+<p>然而问题再次出现，需要Microsoft Visual C++ 9.0</p>
+<figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>Microsoft Visual C++ 9.0 is required. Get it from http://aka.ms/vcpython27</span><br></pre></td></tr></table></figure>
+<p>根据提示安装VC++ 9.0后，再次尝试，依然失败。</p>
+<figure class="highlight taggerscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">error: command 'C:<span class="symbol">\\</span>Users<span class="symbol">\\</span>RAY<span class="symbol">\\</span>AppData<span class="symbol">\\</span>Local<span class="symbol">\\</span>Programs<span class="symbol">\\</span>Common<span class="symbol">\\</span>Microsoft<span class="symbol">\\</span>Visual C++ for Python<span class="symbol">\\</span>9.0<span class="symbol">\\</span>VC<span class="symbol">\\</span>Bin<span class="symbol">\\</span>amd64<span class="symbol">\\</span>cl.exe' failed with exit status 2</span><br></pre></td></tr></table></figure>
+<h2 id="EXE方式安装MySQL-python"><a href="#EXE方式安装MySQL-python" class="headerlink" title="EXE方式安装MySQL-python"></a>EXE方式安装MySQL-python</h2><p>问题多多，放弃该方法，按网上所说直接下载已经编译好的exe包。访问<a href="https://pypi.python.org/pypi/MySQL-python/1.2.5" rel="external nofollow noopener noreferrer" target="_blank">Python Package</a>，下载了MySQL-python-1.2.5.win32-py2.7.exe，安装完成后，不在报错缺失模块，但出现了utf-8字符编码的问题</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">'utf8</span>' codec can<span class="symbol">'t</span> decode byte <span class="number">0</span>xb2 <span class="keyword">in</span> position <span class="number">20</span>: invalid start byte</span><br></pre></td></tr></table></figure>
+<p>经过一番探究，发现可能是因为我使用的是Python 2.7，而MySQL-python是32位的，版本不匹配，然而Python Package网站上只有32位的安装包。</p>
+<p>上网搜索64位安装包，终于发现了一个新网站：<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#mysql-python" rel="external nofollow noopener noreferrer" target="_blank">Unofficial Windows Binaries for Python Extension Packages</a>，下载<strong>MySQL_python-1.2.5-cp27-none-win_amd64.whl</strong>到本地，然后使用pip安装</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">pip</span> <span class="selector-tag">install</span> <span class="selector-tag">MySQL_python-1</span><span class="selector-class">.2</span><span class="selector-class">.5-cp27-none-win_amd64</span><span class="selector-class">.whl</span></span><br></pre></td></tr></table></figure>
+<p>安装完成后，尝试运行Django，不在报错完美运行</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>最后说明一下，MySQL-python支持Python 2，如果使用Python 3，需要使用pymysql作为连接中间件，其安装方法简单，不会由上述一系列问题，具体步骤可上网搜索，此处不再赘述。</p>
+<p>吐槽一下，Python 2对中文太不友好了，大家还是迁移到Python 3吧，Python官方已将于2020年停止维护Pyhton 2系列版本，著名科学计算包NumPy也不再维护Python 2版本，经典Web框架Django 2系列版本也不再支持Python2，这些都说明Python 3正在发展壮大，所以还是快快使用潮流吧！！！</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/MySQL/">MySQL</a></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/Python/">Python</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2017/Google_Fonts/" rel="prev">上篇：在前端开发中使用谷歌字体</a>
+    
+    
+      <a href="/hexo-theme-astrid/2017/Cubic_Bezier/" rel="next">下篇：贝塞尔曲线初探</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

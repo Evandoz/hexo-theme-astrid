@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>更换畅言评论系统 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="畅言,友言">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Hexo_Change_to_Cyan" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">更换畅言评论系统
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">七月 31, 2017</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/Hexo/">Hexo</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>因为一些未知原因，越来越多第三方评论系统纷纷停止服务。2017年多说评论宣布将停止服务，这无疑给用户带来了麻烦，迁徙成了一种选择，本文以实际操作简单介绍搜狐畅言系统的配置。</p>
+<a id="more"></a>
+<h2 id="畅言配置"><a href="#畅言配置" class="headerlink" title="畅言配置"></a>畅言配置</h2><p>使用畅言系统必须提供网站的备案号，否则只能使用 15 天。毕竟现在国家网络信息管的紧，网站都需要备案的，使用独立的域名的司机们应该都备过案了。另外的福利是畅言有广告服务，同意其广告协议可以有广告收入，当然如果你不需要可以不用管它。</p>
+<h3 id="注册获取通用代码"><a href="#注册获取通用代码" class="headerlink" title="注册获取通用代码"></a>注册获取通用代码</h3><p>畅言提供了桌面端、移动端、自适应等几类代码，可根据需要选择自己需要的。本站使用的是自适应的代码，就以此为例说明几点情况。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--PC和WAP自适应版--&gt;</span><br><span class="line">&lt;div id=<span class="string">"SOHUCS"</span> sid=<span class="string">"请将此处替换为配置SourceID的语句"</span> &gt;<span class="xml"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</span><br><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> appid = <span class="string">'你的APPID'</span>;</span><br><span class="line"><span class="keyword">var</span> conf = <span class="string">'你的APPKEY'</span>;</span><br><span class="line"><span class="keyword">var</span> width = <span class="built_in">window</span>.innerWidth || <span class="built_in">document</span>.documentElement.clientWidth;</span><br><span class="line"><span class="keyword">if</span> (width &lt; <span class="number">960</span>) &#123;</span><br><span class="line"><span class="built_in">window</span>.document.write(<span class="string">'&lt;script id="changyan_mobile_js" charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/mobile/wap-js/changyan_mobile.js?client_id='</span> + appid + <span class="string">'&amp;conf='</span> + conf + <span class="string">'"&gt;&lt;\/script&gt;'</span>); &#125; <span class="keyword">else</span> &#123; <span class="keyword">var</span> loadJs=<span class="function"><span class="keyword">function</span>(<span class="params">d,a</span>)</span>&#123;<span class="keyword">var</span> c=<span class="built_in">document</span>.getElementsByTagName(<span class="string">"head"</span>)[<span class="number">0</span>]||<span class="built_in">document</span>.head||<span class="built_in">document</span>.documentElement;<span class="keyword">var</span> b=<span class="built_in">document</span>.createElement(<span class="string">"script"</span>);b.setAttribute(<span class="string">"type"</span>,<span class="string">"text/javascript"</span>);b.setAttribute(<span class="string">"charset"</span>,<span class="string">"UTF-8"</span>);b.setAttribute(<span class="string">"src"</span>,d);<span class="keyword">if</span>(<span class="keyword">typeof</span> a===<span class="string">"function"</span>)&#123;<span class="keyword">if</span>(<span class="built_in">window</span>.attachEvent)&#123;b.onreadystatechange=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">var</span> e=b.readyState;<span class="keyword">if</span>(e===<span class="string">"loaded"</span>||e===<span class="string">"complete"</span>)&#123;b.onreadystatechange=<span class="literal">null</span>;a()&#125;&#125;&#125;<span class="keyword">else</span>&#123;b.onload=a&#125;&#125;c.appendChild(b)&#125;;loadJs(<span class="string">"https://changyan.sohu.com/upload/changyan.js"</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="built_in">window</span>.changyan.api.config(&#123;<span class="attr">appid</span>:appid,<span class="attr">conf</span>:conf&#125;)&#125;); &#125; &#125;)(); <span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>上面的代码中需要替换的有三处：SourceID、APPID、APPKEY：</p>
+<ol>
+<li>SourceID 就是文章获页面的唯一标识，就是数据库表中的(类似)主键，因为评论在数据库中存储要与对应的文章会页面匹配，否则会出现评论的混乱。对于 Hexo，可以把相关页的链接（如page.path/url_for(page.path)）或者标题（如page.title）作为 SourceID。</li>
+<li>APPID和APPKEY在畅言的后台都可以获取。需要注意的是 APPKEY，在后台给的代码中，APPKEY 位置给出的是以<code>prod</code>开头的一串代码，而在其帮助文档中写的是 APPKEY ，虽然两串代码不相同，但都能实现功能，任选一种即可，建议使用 APPKEY。</li>
+</ol>
+<h3 id="安装其他插件"><a href="#安装其他插件" class="headerlink" title="安装其他插件"></a>安装其他插件</h3><p>除主体评论框外，畅言还提供了诸如评论数目、热门评论、热评用户等插件，可根据需要自行选择，本站只安装了评论数目，简单说一下注意事项。</p>
+<p>关于评论数目的代码，畅言官方提供了三种，详情可访问<a href="http://changyan.kuaizhan.com/install/code/comment-count-code" rel="external nofollow noopener noreferrer" target="_blank">获取评论数代码</a>。主要就是两种情况：含评论框的页面和不含评论框的页面，前者适用于列表页，后者适用于详情页，至于原因那就是不言而喻了。经本站测试其实都使用<code>不含评论框那种代码</code>即可，不过<strong>需要注意</strong>的是，不要更改的标签名称，否则会出问题，这是本站已经测试过的，也是不得不吐槽的一点了。</p>
+<p>更多插件可登录<a href="http://changyan.kuaizhan.com/labs/list" rel="external nofollow noopener noreferrer" target="_blank">畅言后台</a>获取。</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/Hexo/">Hexo</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2017/Word_Size_in_Computing_System/" rel="prev">上篇：计算机系统中的字长</a>
+    
+    
+      <a href="/hexo-theme-astrid/2017/Google_Fonts/" rel="next">下篇：在前端开发中使用谷歌字体</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

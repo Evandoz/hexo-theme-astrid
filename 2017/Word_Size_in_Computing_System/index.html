@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>计算机系统中的字长 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="计算机系统,字长">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Word_Size_in_Computing_System" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">计算机系统中的字长
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">八月 27, 2017</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/系统结构/">系统结构</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>计算机系统是一个复杂的由内到外的复杂系统，包含了硬件和软件两个部分，而字长作为系统中一个基本单位需要深入理解，本文将总结计算机系统中各种字长的意义。</p>
+<a id="more"></a>
+<h2 id="字与字长"><a href="#字与字长" class="headerlink" title="字与字长"></a>字与字长</h2><p>字(word)是指在计算机中作为一个整体被存取、传送、处理的一组二进制数,是一串数字。而字长(word size)则是这串数字即一个字的位数它是计算机系统结构中的一个重要特性。字长是由CPU的类型所决定，不同的计算机系统的字长是不同的，常见的有8位、16位、32位、64位等，字长越长，计算机一次处理的信息位就越多，精度就越高，字长是计算机性能的一个重要指标。</p>
+<p><strong>注</strong>：计算机系统中，字是一个基本单位，而字长是一种评价指标，注意区分。</p>
+<h2 id="位与字节"><a href="#位与字节" class="headerlink" title="位与字节"></a>位与字节</h2><p>这里顺便提一下字节与位的概念。位(bit，简写为b)是计算机系统中最小的数据单位，也是存储器存储信息的最小单位，存放一位二进制数，即0或1。字节(Byte，简写为B)是计算机系统中表示存储容量的最常用的基本单位。一个字节由8位二进制数组成，一个字符占一个字节，一个汉字占两个字节。</p>
+<p>常见的存储容量计算单位还有KB、MB、GB、TB，另外还有PB、EB、ZB、YB，这几个不是很常见。这些单位之间的换算进率均为1024，即2的10次幂。而B与b之间进率是8，即1B(yte)=8b(it)。在我们使用的应用中计算某种速率用的一般都是b，注意区别与B，不要别欺骗了，例如bps。</p>
+<h2 id="四种字长"><a href="#四种字长" class="headerlink" title="四种字长"></a>四种字长</h2><p>机器字长：CPU一次能处理数据的位数，通常与CPU的寄存器位数有关，一般可以通过寄存器的位数来判断机器字长。<br>存储字长：存储器中一个存储单元(存储地址)所存储的二进制代码的位数，即存储器中的MDR的位数，而其中的二进制代码称作字。<br>指令字长：计算机系统中机器指令的二进制代码总位数，它取决于操作码的长度、操作数地址的长度和操作数地址的个数，不同的指令的字长是不同的。指令字长一般都取存储字长的的整数倍，如果取2倍，则需要2次访存取出一条指令。<br>数据字长：计算机系统中数据存储所占用的位数。</p>
+<p><strong>注</strong>：操作系统的位数是操作系统可以寻址的位数，与机器字长是不一样的。选用多少位的操作系统要考虑处理器的架构和内存的大小。<br>64位操作系统为64位架构的计算机而设计，能够利用64位处理器的优势。但64位机器可以使用64位操作系统系统，也可以使用32位操作系统，而32位机器是无法使用64位操作系统的。<br>另外，<code>在满足前一条件下</code>，操作系统寻址空间最好大于或等于内存的大小，但不易过大，否则操作系统自身会占用大量内存影响机器的速度。如32位系统寻址空间大小位2的32次幂，即4G，但一般只识别3.25-3.75之间。因此4G及以下的内存空间一般安装32位系统。</p>
+<p>冯诺依曼机中，指令和数据同等重要，都存放在存储器中，并可按地址寻访。<br>早期的计算机：指令字长 = 机器字长 = 存储字长。故访问某个存储单元便可取一条完整的指令或一条完整的数据，这些机器的指令字长是固定的，控制方式比较简单。<br>随着计算机的发展，存储容量增大，处理的数据类型增多，计算机指令字长发生很大变化。一台机器的指令系统可以采用位数不相同的指令，即指令字长是可变的，如单字节指令、多字节指令。控制这类指令的电路较为复杂，多字节指令则需要多次访存才能取出一条完整的指令，因此CPU速度下降。三者可能各不相同，但它们必须是字节的整数倍。</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/字长/">字长</a></li><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/计算机系统/">计算机系统</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/" rel="prev">上篇：配置gitment出现Validation Failed问题</a>
+    
+    
+      <a href="/hexo-theme-astrid/2017/Hexo_Change_to_Cyan/" rel="next">下篇：更换畅言评论系统</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>

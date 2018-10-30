@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  
+  <title>空数据段引发的问题及思考 | Astrid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+    <meta name="keywords" content="汇编语言,段重叠">
+  
+  
+  
+  
+  
+  
+    <link rel="icon" href="/hexo-theme-astrid/css/images/favicon.ico">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  <link rel="stylesheet" href="/hexo-theme-astrid/css/style.css">
+</head>
+
+
+<body>
+  <div class="preloader">
+    <div class="preloader-inner">
+      <ul><li></li><li></li><li></li><li></li><li></li><li></li></ul>
+    </div>
+  </div>
+  <div id="page" class="site">
+    <header id="header" class="site-header">
+  <div class="container">
+    <div class="site-branding">
+      <h1 class="site-title">
+        <a href="/hexo-theme-astrid/" title="Astrid">Astrid</a>
+      </h1>
+    </div>
+    <div class="btn-menu"><ul><li></li><li></li><li></li></ul></div>
+    <div id="mainnav" class="main-navigation">
+      <ul id="primary-menu" class="menu">
+        
+          <li><a href="/hexo-theme-astrid/" title="Home">首页</a></li>
+        
+          <li><a href="/hexo-theme-astrid/archives" title="Archives">归档</a></li>
+        
+          <li><a href="/hexo-theme-astrid/categories" title="Categories">分类</a></li>
+        
+          <li><a href="/hexo-theme-astrid/tags" title="Tags">标签</a></li>
+        
+          <li><a href="/hexo-theme-astrid/about" title="About">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</header>
+<div class="copy"></div>
+
+    <div id="content" class="site-content">
+      <div class="container">
+        <section id="primary" class="content-area"><article id="Something_About_Data_Segment" class="article clearfix">
+  <header class="post-header">
+    
+  
+    <h1 class="post-title">空数据段引发的问题及思考
+  
+
+</h1>
+    <div class="post-meta">
+      <span class="post-date">十一月 11, 2016</span>
+
+      
+  <span class="post-categories">
+	<a class="post-category-link" href="/hexo-theme-astrid/categories/汇编编程/">汇编编程</a>
+  </span>
+
+
+    </div>
+  </header>
+  
+    <div id="post-content" class="post-content"><p>之前使用<code>Dosbox</code>环境编写汇编程序遇到的一个问题，经过摸索已基本搞清楚原因。</p>
+<a id="more"></a>
+<h2 id="问题引入"><a href="#问题引入" class="headerlink" title="问题引入"></a>问题引入</h2><hr>
+<p>原题目很简单，就是将 00F~0FH 共 16 个数字写入内存 3000H 开始的连续 16 个存储单元，但是我当时很纳闷为什么要写在 3000H 开始的内存中，于是就直接写在 0000H 开始的内存单元中，而且为了省事把前一个代码的数据段、代码段定义部分直接搬过来，但是写完后发现数据段并没有用到，心想也没有什么影响，就没有管它，然后就出错了。</p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">DATA 	<span class="meta">SEGMENT</span></span><br><span class="line"></span><br><span class="line">DATA 	ENDS</span><br><span class="line">CODE 	<span class="meta">SEGMENT</span></span><br><span class="line">        <span class="meta">ASSUME</span> 	<span class="built_in">CS</span>:CODE, <span class="built_in">DS</span>:DATA</span><br><span class="line"><span class="symbol">START:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AX</span>,DATA</span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DS</span>,<span class="built_in">AX</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DI</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">CX</span>,<span class="number">16</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AL</span>,<span class="number">0</span></span><br><span class="line"><span class="symbol">CWRITE:</span></span><br><span class="line">        <span class="keyword">MOV</span> [<span class="built_in">DI</span>],<span class="built_in">AL</span></span><br><span class="line">        <span class="keyword">INC</span> <span class="built_in">AL</span></span><br><span class="line">        <span class="keyword">INC</span> <span class="built_in">DI</span></span><br><span class="line">        <span class="keyword">LOOP</span> CWRITE</span><br><span class="line"><span class="symbol">EXIT:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="number">AH</span>,<span class="number">4CH</span></span><br><span class="line">        <span class="keyword">INT</span> <span class="number">21H</span></span><br><span class="line">CODE 	ENDS</span><br><span class="line">END 	START</span><br></pre></td></tr></table></figure>
+<h2 id="问题发现"><a href="#问题发现" class="headerlink" title="问题发现"></a>问题发现</h2><hr>
+<p><strong>出错结果：</strong></p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox001.png" alt="errorview"></p>
+<p>程序运行结束时 <code>CX=0002</code>，也就是说循环 <code>LOOP</code> 提前退出，这很奇怪！！！</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox002.png" alt="errorview"></p>
+<p>而且我们查看当前内存单元的内容发现，我们的数据并没有正确写入，最后两个数据是不正确的。</p>
+<h2 id="问题解析"><a href="#问题解析" class="headerlink" title="问题解析"></a>问题解析</h2><hr>
+<p>为了搞清楚问题出在哪，接下来进行单步调试，来一步一步看程序是如何执行的，尤其看一下 <code>CX=0002</code> 时，程序究竟在干嘛！！！</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox003.png" alt="trackview"></p>
+<p>单步执行开始，此时 <code>CX=000F</code>，继续向下，中间部分都符合程序正常逻辑。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox004.png" alt="trackview"></p>
+<p>现在来到 <code>CX=0002</code>，往下应该是继续执行循环体，<strong>但是</strong>，问题出现了！！！</p>
+<ol>
+<li>首先，冒出了一句程序中没有的代码 <code>OR AX, 05FE</code>，并且发现<code>05FE</code> 就是之前查看内存时，被错误写入的那两个数据；</li>
+<li>接着看一下这条指令在内存中的位置 <code>076A:000D</code> ，单步调试开始的时候，<code>076A:000D</code> 中的指令是 <code>MOV [DI], AL</code>。也就是说，当执行若干次循环到 <code>CX=0002</code> 的时候，该内存单元的内容被修改；</li>
+<li>最后来看这块连续内存(000D-000F)中存储的内容，此时这块内存中内容为 <code>OD05FE</code>，而单步调试开始的时候，该连续内存中的内容是 <code>8805</code>。</li>
+</ol>
+<p>通过上述三点分析，已经不难发现，我们的程序在执行的后期被我们的数据修改了，数据从 <code>0000</code> 单元开始写入，当写到 <code>000D</code> 单元时，刚好碰到代码区，将原本的循环体内容覆盖，导致本该循环执行的指令出现差错，程序异常退出。<br>但是新的问题又出现了，数据段与代码段开始的地方为什么会离得这么近以至于出现如此近距离的冲突，我们做进一步探究…</p>
+<h2 id="深入探究"><a href="#深入探究" class="headerlink" title="深入探究"></a>深入探究</h2><hr>
+<p>在程序开始时我们看一下数据段与代码段在内存中的位置</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox005.png" alt="errorview"></p>
+<p>程序开始前，数据段 <code>DS=075A</code>，代码段 <code>CS=076A</code>，两者相差 <code>100H</code>，即 256 个内存单元；然而当执行完装段操作(MOV DS, AX)后，数据段与代码段却变成一样的了(076A)，难怪会出现重叠。那么就是说我们定义的数据段和代码段是同一个位置开始的，那如果把数据段去掉结果会如何呢？</p>
+<p><strong>代码如下：</strong></p>
+<p>去掉 <code>DATA     SEGMENT</code> 的定义</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">CODE 	<span class="meta">SEGMENT</span></span><br><span class="line">        <span class="meta">ASSUME</span> 	<span class="built_in">CS</span>:CODE</span><br><span class="line"><span class="symbol">START:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DI</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">CX</span>,<span class="number">16</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AL</span>,<span class="number">0</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p><strong>结果展示：</strong></p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox006.png" alt="rightview"></p>
+<p>去掉数据段之后，结果是正确的，只是这时数据是写在 <code>075A:0000</code> 开始的位置了。难道我们定义了数据段就会出现这样的问题，那么当年 Intel 的工程师们也太弱了吧，居然会出现这么严重的 Bug，但接下来的探究证明 Intel 毕竟是 Intel，不然 8086 也不会成为一代经典之作。</p>
+<h2 id="进一步发现"><a href="#进一步发现" class="headerlink" title="进一步发现"></a>进一步发现</h2><hr>
+<p>在之前的代码中虽然定义了数据段，但是并没有在其中定义数据，也就是说我们定义了一个空数据段，那么现在我们在数据段中定义一个数据，虽然我们不用它。</p>
+<p><strong>代码如下：</strong><br><figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA 	<span class="meta">SEGMENT</span></span><br><span class="line">        A <span class="built_in">DB</span> <span class="number">00H</span> <span class="comment">;定义数字</span></span><br><span class="line">DATA 	ENDS</span><br><span class="line"></span><br><span class="line">CODE 	<span class="meta">SEGMENT</span></span><br><span class="line">        <span class="meta">ASSUME</span> 	<span class="built_in">CS</span>:CODE, <span class="built_in">DS</span>:DATA</span><br><span class="line"><span class="symbol">START:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AX</span>,DATA</span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DS</span>,<span class="built_in">AX</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DI</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">CX</span>,<span class="number">16</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AL</span>,<span class="number">0</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure></p>
+<p><strong>结果展示：</strong></p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox007.png" alt="rightview"></p>
+<p>加上 <code>DATA     SEGMENT</code> 的定义，并且在其中定义变量之后，结果正确，那么看一下此时代码段与数据段的位置。</p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox008.png" alt="rightview"></p>
+<p>此时，数据段 <code>DS=076A</code>，代码段 <code>CS=076B</code>，并且装段前后皆如此，他们之间相差 <code>10H</code>，即 16 个内存单元。这里我们只定义了一个字节型数据，系统默认为我们空出 16 个字节的，那么若是定义两个，三个会如何呢？<br>通过测试发现它是根据我们定义数据所占用内存单元的大小来为我们留出相应空间的，并且是以 16 个字节为一个单位，例如，当我们定义了 17 个字节型数据，它默认留出的空间是 32 个内存单元，当我们定义了 17 个字型数据，它默认留出的空间是 48 个内存单元，以此类推。</p>
+<p>下面是定义了 17 个字节型数据的代码及演示结果。</p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">DATA 	<span class="meta">SEGMENT</span></span><br><span class="line">        A <span class="built_in">DB</span> <span class="number">17</span> DUP(<span class="number">00H</span>) <span class="comment">;定义数字</span></span><br><span class="line">DATA 	ENDS</span><br><span class="line"></span><br><span class="line">CODE 	<span class="meta">SEGMENT</span></span><br><span class="line">        <span class="meta">ASSUME</span> 	<span class="built_in">CS</span>:CODE, <span class="built_in">DS</span>:DATA</span><br><span class="line"><span class="symbol">START:</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AX</span>,DATA</span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DS</span>,<span class="built_in">AX</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">DI</span>,<span class="number">0</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">CX</span>,<span class="number">16</span></span><br><span class="line">        <span class="keyword">MOV</span> <span class="built_in">AL</span>,<span class="number">0</span></span><br><span class="line">        ...</span><br></pre></td></tr></table></figure>
+<p><strong>结果展示：</strong></p>
+<p><img src="https://floretten-1252347631.costj.myqcloud.com/Assembly/DosBox009.png" alt="rightview"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
+<p>血淋林的教训告诉我们没事别定义空数据段，然后把它晾在那，不然出现的问题会让人很意外！！！</p>
+<p>以上便是本次编程经历的全部发现，如有问题或者类似的发现可一起交流探讨。</p>
+</div>
+    <footer class="post-footer">
+      
+  <ul class="post-tag-list"><li class="post-tag-list-item"><a class="post-tag-list-link" href="/hexo-theme-astrid/tags/汇编/">汇编</a></li></ul>
+
+
+      <p class="post-copyright">&copy; 除特殊声明外，文章著作权归作者所有，转载请注明作者及出处</p>
+
+    </footer>
+  
+</article>
+
+  
+  <div class="post-navigation" role="navigation">
+    
+      <a href="/hexo-theme-astrid/2016/Flow_CI_Hexo/" rel="prev">上篇：使用 flow.ci 自动部署 Hexo</a>
+    
+    
+      <a href="/hexo-theme-astrid/2016/Register_of_8086/" rel="next">下篇：8086 通用寄存器的专用功能</a>
+    
+    </div>
+  
+
+
+
+</section>
+        <aside id="secondary" class="widget-area">
+  
+    
+  <div class="widget">
+    <h3 class="widget-title">近期文章</h3>
+    <ul>
+      
+        <li><a href="/hexo-theme-astrid/2018/Archlinux_Secure_Boot/">在 Archlinux 中使用 Secure Boot</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Element_Absolute_Center_with_Margin/">配合非负 margin 实现元素的绝对居中</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/NPM_Package_Update/">项目中如何使用npm更新package</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Dev_Server_Webpack_Dev_Conf/">Vue开发中本地请求数据配置从dev-server.js到webpack-dev-conf.js的迁移</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/CSS_Image_Scale_Up/">CSS实现图片等比例缩放</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Vue_Element_UI_Default_Active/">Vue Router+Element UI实现导航实例</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Django_Vue.js_Web/">Vue+Django前后分离快速构建WebApp</a></li>
+      
+        <li><a href="/hexo-theme-astrid/2018/Gitment_Validation_Failed/">配置gitment出现Validation Failed问题</a></li>
+      
+    </ul>
+  </div>
+
+
+  
+    
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      
+        <li><a href="https://github.com" title="Github" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://facebook.com" title="Facebook" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://twitter.com" title="Twitter" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://plus.google.com" title="Google+" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+        <li><a href="https://youtube.com" title="Youtube" rel="external nofollow noopener noreferrer" target="_blank"></a></li>
+      
+    </ul>
+  </div>
+
+
+  
+</aside>
+
+      </div>
+    </div>
+    <footer id="footer" class="site-footer">
+  <div class="container">
+    <div class="footer-navigation">
+      &copy; 2016 - 2018 Astrid
+    </div>
+    <div class="site-copyright">
+      Powered by <a herf="https://hexo.io">Hexo</a> / Theme by <a href="https://github.com/Laueray/hexo-theme-astrid" target="_blank" rel="external nofollow noopener noreferrer">Astrid</a>
+    </div>
+  </div>
+</footer>
+  </div>
+  <div id="top-anchor" class="top-anchor">
+  <ul><li></li><li></li></ul>
+</div>
+
+  <script src="/hexo-theme-astrid/js/jquery.js"></script>
+<script src="/hexo-theme-astrid/js/velocity.js"></script>
+<script src="/hexo-theme-astrid/js/plugins.js"></script>
+<script src="/hexo-theme-astrid/js/scripts.js"></script>
+
+
+
+
+
+</body>
+
+</html>
