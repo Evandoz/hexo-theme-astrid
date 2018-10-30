@@ -1,6 +1,18 @@
-.archives-article-wrap
-  padding-top: 30px
-  padding-bottom: 30px
+.archive
+  @media md-min
+    border-right: 1px solid #f2f2f3
+
+  &.tags
+    margin: 0 0 -1px
+    padding: 30px 50px
+    border-top: 1px solid #f2f2f3
+    border-bottom: 1px solid #f2f2f3
+    a
+      display: inline-block
+      height: 32px
+      margin: 5px
+      line-height: @height
+      color: #272727
   blockquote
     margin: 0
     padding: 1em
@@ -17,35 +29,81 @@
         color: #fcd088
         text-decoration: none
 
-.archives-wrap
-  margin: 10px 0
-
-.archive-year-wrap
-  padding: .5em 0
-  h2
-    color: #fcd088
-    font-size: 1.6em
-    a
+  .archive-count,
+  .archive-year
+  .archive-category,
+  .archive-tag
+    display: block
+    margin: 0 0 -1px
+    padding: 20px 50px
+    color: #272727
+    font-size: 1.4em
+    border-top: 1px solid #f2f2f3
+    border-bottom: 1px solid #f2f2f3
+    text-decoration: none
+    &:hover
       text-decoration: none
-      &:hover
-        text-decoration: none
 
-.archive-year
-  @extend $block-caption
-  margin: 0
-  padding: 10px 0
+  .archive-year:before,
+  .archive-category:before,
+  .archive-tag:before
+    font-family: "FontAwesome"
+    margin-right: 10px
+    font-size: 1.1em
+    color: #fcd088
 
-.archive-year:before
-  font-family: "FontAwesome"
-  content: "\f073"
-  margin-right: .2em
+  .archive-year:before
+    content: "\f073"
+  .archive-category:before
+    content: "\f114"
+  .archive-tag:before
+    content: "\f02c"
 
-.archive-content-wrap
-  margin: 0 2em
-  column-gap: 10px
+  ul.archive-list
+    margin: 0 0 -1px
+    padding: 50px
+    border-top: 1px solid #f2f2f3
+    border-bottom: 1px solid #f2f2f3
+    li.archive-item
+      position: relative
+      margin-bottom: 15px
+      font-size: 0
+      &:last-child
+        margin-bottom: 0
+      .post-date,
+      .post-title
+        display: inline-block
+        line-height: 1.6
+        font-size: 16px
+        color: #272727
+      .post-date
+        position: absolute
+        left: 0
 
-.archive-entry-header
-  padding: 15px 0
+      .post-title
+        margin-left: 120px
+
+    li.archive-list-item
+      position: relative
+      display: inline-block
+      width: 140px
+      padding: 5px 0
+      box-sizing: border-box
+      .archive-list-link,
+      .archive-list-count
+        color: #272727
+
+      .archive-list-count
+        position: relative
+        margin-left: 2px
+        &:before
+          content: '('
+          padding-right: 1px
+        &:after
+          content: ')'
+          padding-left: 1px
+
+
 
 .archive-entry-date
   float: left
@@ -81,56 +139,67 @@
       color: #fcd088
       text-decoration: none
 
-.archive-tag
-  @extend $block-caption
-  text-transform: none;
-  color: #fcd088
-
-.archive-tag:before
-  font-family: "FontAwesome"
-  content: "\f02c"
-  margin-right: .2em
-
-.archive-category
-  @extend $block-caption
-  text-transform: none;
-  color: #fcd088
-
-.archive-category:before
-  font-family: "FontAwesome"
-  content: "\f07c"
-  margin-right: .3em
-
-
-#page-nav
-  clearfix()
-  margin: 40px 10px
+.paginator
+  margin: 0 0 -1px
+  padding: 50px
   background: #fff
   text-align: center
-  color: #fcd088
+  border-top: 1px solid #f2f2f3
+  border-bottom: 1px solid #f2f2f3
+  @media md-min
+    border-right: 1px solid #f2f2f3
   a, span
-    padding: 10px 20px
-    line-height: 1
-  a
+    display: inline-block
+    width: 42px
+    height: 42px
+    line-height: @height
     color: #fcd088
     text-decoration: none
+    text-align: center
+    box-sizing: border-box
+    border: 1px solid #fcd088
+    &:not(:last-child)
+      margin-right: -1px
     &:hover
-      background: #fcd088
       color: #272727
-    i
-      font-size: inherit
-      line-height: inherit
-  .prev, .next
-    display: inline-block
-    margin: 0 10px
-    border: 1px solid #fcd088
-  .page-number
-    display: inline-block
-    margin: 0 10px
-    border: 1px solid #fcd088
+      background: #fcd088
   .current
-    color: #666
+    color: #272727
     background: #fcd088
-    font-weight: bold
-  .space
-    color: #fcd088
+
+
+.page-header
+	border-bottom: 1px solid #F2F2F3
+	margin: 0
+	padding: 20px 60px
+.page-header .page-title
+	margin: 0
+	padding: 0
+.page-header .page-title .fa
+	margin-right: 15px
+	color: #fcd088
+
+.comment-navigation,
+.posts-navigation
+	margin: 0
+	overflow: hidden
+	padding: 30px 60px
+
+.comment-navigation .nav-prev,
+.posts-navigation .nav-prev
+	float: left
+	width: 50%
+.comment-navigation a,
+.posts-navigation a,
+.post-navigation a
+	color: #272727
+.comment-navigation a:hover,
+.posts-navigation a:hover,
+.post-navigation a:hover
+	color: #fcd088
+	text-decoration: none
+.comment-navigation .nav-next,
+.posts-navigation .nav-next
+	float: right
+	text-align: right
+	width: 50%

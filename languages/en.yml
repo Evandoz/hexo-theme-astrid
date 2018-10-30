@@ -19,8 +19,8 @@ recent_comments: Recent Comments
 
 read_more: Read More
 
-contents: Contents
-none: None
+newer: Newer-
+older: Older-
 
 post_total_count: There are %d posts in total till now.
 category_total_count: There are %d categories in total till now.

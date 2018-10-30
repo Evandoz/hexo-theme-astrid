@@ -1,80 +1,77 @@
 .article
-  margin-bottom: -1px
-  padding: 50px
+  margin: 0 0 -1px
+  padding: 30px
   background: #fff
   box-sizing: border-box
   border-top: 1px solid #f2f2f3
-  border-right: 1px solid #f2f2f3
   border-bottom: 1px solid #f2f2f3
-  @media (max-width: 991px)
-    border-right: none
-  .entry-title
+  @media md-min
+    padding: 50px
+    border-right: 1px solid #f2f2f3
+  .post-title
+    display: block
     margin-top: 0
-  .entry-title,
-  .entry-title a
+    margin-bottom: 20px
+    font-family: 'Josefin Sans', sans-serif
+    font-size: 25px
     color: #272727
-  .entry-meta
+  .post-meta
     margin-bottom: 30px
     padding: 5px
     border-top: 1px solid #f2f2f3
     border-bottom: 1px solid #f2f2f3
-  .entry-footer
-    padding: 0 50px
-  .entry-meta,
-  .entry-meta a,
-  .entry-footer,
-  .entry-footer a
+  .post-meta,
+  .post-meta a,
+  .post-footer,
+  .post-footer a
     color: #a0a8ab
-  .entry-meta,
-  .entry-footer
+  .post-meta,
+  .post-footer
     font-size: 13px
-  .entry-meta span::before,
-  .entry-footer span ::before
+  .post-meta span::before,
+  .post-footer span ::before
     font-family: 'FontAwesome'
     margin-right: 5px
-  .entry-meta .entry-categories::before
+  .post-meta .post-categories::before
     content: '\f114'
-  .entry-meta .entry-comments::before
+  .post-meta .post-comments::before
     content: '\f0e6'
-  .entry-meta .entry-date::before
+  .post-meta .post-date::before
     content: '\f073'
-  .entry-meta .entry-visitor::before
+  .post-meta .post-visitor::before
     content: '\f06e'
-  .entry-meta .entry-tags::before
+  .post-meta .post-tags::before
     content: '\f02c'
-  .entry-meta span::after
+  .post-meta span::after
     content: '/'
     margin: 0 15px
-  .entry-meta span:last-of-type::after
+  .post-meta span:last-of-type::after
     content: ''
     margin: 0
-  .entry-thumb
+  .post-thumb
     padding-right: 30px
-  .entry-thumb,
+  .post-thumb,
   .post-thumb
     transition: opacity 0.4s
-  .entry-thumb:hover,
+  .post-thumb:hover,
   .post-thumb:hover
     opacity: 0.7
   .post-thumb
     margin-bottom: 30px
-  .has-post-thumbnail .entry-summary,
-  .entry-thumb
+  .has-post-thumbnail .post-summary,
+  .post-thumb
     width: 50%
     float: left
-  .entry-thumb,
-  .entry-summary
+  .post-thumb,
+  .post-summary
     margin-bottom: 30px
   .read-more
     clear: both
     margin-bottom: 0
 
-/*entry-meta*/
-.entry-date
-
-.entry-category-link
-
-.entry-tag-list
+/*post-meta*/
+.post-date
+.post-category-link
   display: inline-block
   margin: 0
   -webkit-margin-before: 0
@@ -83,21 +80,18 @@
   -webkit-margin-end: 0
   -webkit-padding-start: 0
 
-.entry-tag-list-item
-  display: inline-block
-  margin-right: 8px
-
-.entry-comment-link
+.post-comment-link
   float: right
   &:before
     content: "\f075"
     font-family: "FontAwesome"
     padding-right: 8px
 
-/*entry-content*/
-.entry-content
+/*post-content*/
+.post-content
   clearfix()
   padding: 0
+  @extend $base-style
   p, table
     line-height: 1.9
   h1, h2, h3, h4, h5, h6
@@ -198,24 +192,23 @@
       height: 100%
       margin-top: 0
 
-.nav
-  padding: 0
-  margin: .95em
-  margin-bottom: 0
-  line-height 1.8em
-  li
-    list-style-type none
-    a:hover
-      background-color: transparent !important
-  .active > a
-    color: #fcd088
 .post-navigation
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-flow: wrap
   margin: 0
-  padding: 30px 50px
-  border-right: 1px solid #f2f2f3
+  padding: 20px 30px
   overflow: hidden
-.nav-child
-  padding-left: 16px
+  @media md-min
+    padding: 20px 50px
+    border-right: 1px solid #f2f2f3
+  a
+    display: block
+    margin: 5px 0
+    overflow: hidden
+    white-space: nowrap
+    text-overflow: ellipsis
 
 .nav-link
   font-family: 'Josefin Sans', sans-serif
@@ -225,19 +218,31 @@
     color: #fcd088
     text-decoration: none
 
-#copyright
-  blockquote
-    padding: 5px 15px
-    margin: 0
-    font-family: "futura-pt", Helvetica, Arial, "Hiragino Sans GB", "Hiragino Sans GB W3", Microsoft JhengHei, WenQuanYi Micro Hei, "Microsoft YaHei", sans-serif
-    border-left: 5px solid #fcd088
-    background: rgba(208,211,248,0.15)
-    p
-      font-size: 14px !important
-      color: #333
-      margin: 3px 0
-      a
-        word-wrap: break-word
-        color: #333
-        &:hover
-          color: #fcd088
+.post-footer
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex-flow: wrap
+  margin-top: 30px
+
+p.post-copyright,
+ul.post-tag-list
+  display: block
+  margin: 5px 0
+  font-family: "Microsoft YaHei", sans-serif
+  line-height: 1.6
+  font-size: 12px
+  color: #a0a8ab
+
+li.post-tag-list-item
+  display: inline-block
+  margin-right: 10px
+  &:before
+    content: '\f02c'
+    font-family: 'FontAwesome'
+    margin-right: 5px
+  &:last-child
+    margin-right: 0
+  .post-tag-list-link
+    line-height: 1.6
+    font-size: 12px

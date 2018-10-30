@@ -1,27 +1,23 @@
-<header class="page-header">
-  <h1 class="page-title"><%= __('tag_total_count', site.tags.length) %></h1>
-</header>
-<div class="hentry archives-article-wrap">
-  <% if(site.tags.length) { %>
-    <blockquote>
-      <%- tagcloud({min_font: 14, max_font: 28}) %>
-    </blockquote>
-  <% } %>
-<!--
-  <% site.tags.sort('name').map(function(tag){  %>
-    <section class="archives-wrap">
-      <div class="archive-year-wrap" id="<%= tag.name %>">
-        <h2 class="archive-tag"><%= tag.name %></h2>
-      </div>
-      <div class="archive-content-wrap">
-        <% tag.posts.sort('-date').map(function(post, i){  %>
-          <%- partial('_partial/archive-post', {post: post, index: true}) %>
-          <% if (post.subtitle && post.subtitle.length) { %>
-            <h3 class="post-subtitle"><%- post.subtitle %></h3>
-          <% } %>
-        <% }) %>
-      </div>
-    </section>
-  <% }) %>
--->
+<!-- 标签页面，可选择性注释部分模块 -->
+
+<div class="archive">
+  <h1 class="archive-count"><%= __('tag_total_count', site.tags.length) %></h1>
 </div>
+
+<div class="archive tags">
+  <% if(site.tags.length) { %>
+    <%- tagcloud({min_font: 14, max_font: 28}) %>
+  <% } %>
+</div>
+
+<div class="archive list">
+  <% if(site.tags.length) { %>
+    <%- list_tags({class: 'archive'}) %>
+  <% } %>
+</div>
+
+<!-- <% site.tags.sort('name').map(function(tag){  %>
+  <%- partial('_partial/archive', {
+    page: tag, title: tag.name, pagination: config.tag, index: true
+  }) %>
+<% }) %> -->

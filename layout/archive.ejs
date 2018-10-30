@@ -1,4 +1,15 @@
-<header class="page-header">
-  <h1 class="page-title"><% if (is_month()) { %><%= __('month') %>: <%= _(page.year) %>.<%= _(page.month) %><% } else if (is_year()) { %><%= __('year') %>: <%= _(page.year) %><% } else { %><%= __('post_total_count', site.posts.length) %><% } %></h1>
-</header>
+<!-- 归档页面，可选择性注释部分模块 -->
+
+<% if (!is_year() && !is_month()) { %>
+  <div class="archive">
+    <h1 class="archive-count"><%= __('post_total_count', site.posts.length) %></h1>
+  </div>
+
+  <div class="archive list">
+    <% if(site.posts.length) { %>
+      <%- list_archives({format: 'YYYY MMMM', class: 'archive'}) %>
+    <% } %>
+  </div>
+<% } %>
+
 <%- partial('_partial/archive', {pagination: config.archive, index: true}) %>

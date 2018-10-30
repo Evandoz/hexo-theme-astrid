@@ -1,5 +1,1 @@
-<span class="<%= class_name %>">
-  <a href="<%- url_for(post.path) %>">
-	<time datetime="<%= date_xml(post.date) %>" itemprop="datePublished"><%= date(post.date, date_format) %></time>
-  </a>
-</span>
+<span class="post-date"><%- date(post.date, date_format) %></span>

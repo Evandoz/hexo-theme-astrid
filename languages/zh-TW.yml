@@ -19,8 +19,8 @@ recent_comments: 最新评论
 
 read_more: 閱讀全文
 
-contents: 文章目錄
-none: 無
+newer: 上篇：
+older: 下篇：
 
 post_total_count: 目前共計%d篇文章
 category_total_count: 目前共计%d个分類

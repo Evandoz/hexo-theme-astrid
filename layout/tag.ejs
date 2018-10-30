@@ -1,4 +1,1 @@
-<header class="page-header">
-  <h1 class="page-title"><i class="fa fa-tag"></i><%- page.tag %></h1>
-</header>
-<%- partial('_partial/archive', {pagination: config.tag, index: true}) %>
+<%- partial('_partial/archive', {title: page.tag, pagination: config.tag, index: true}) %>

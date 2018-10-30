@@ -1,9 +1,9 @@
 <% if (theme.social){ %>
-<aside class="widget widget_social">
-  <ul class="social-menu-widget clearfix">
-    <% Object.keys(theme.social).forEach(function(key) { %>
-   	  <li><a href="<%= theme.social[key] %>" title="<%=key.trim()%>"></a></li>
-   	<% }) %>
-  </ul>
-</aside>
+  <div class="widget widget_social">
+    <ul class="social-menu-widget clearfix">
+      <% Object.keys(theme.social).forEach(function(key) { %>
+        <li><a href="<%= theme.social[key] %>" title="<%=key.trim()%>"></a></li>
+      <% }) %>
+    </ul>
+  </div>
 <% } %>

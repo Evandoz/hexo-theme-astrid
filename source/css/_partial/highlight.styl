@@ -1,20 +1,29 @@
 $highlight_theme = hexo-config("highlight_theme")
 
-$highlight-background   = #f8f8f8
+if $highlight_theme == "normal"
+  $highlight-deletion     = #fdd
+  $highlight-addition     = #dfd
+else
+  $highlight-deletion     = #008000
+  $highlight-addition     = #800000
 
 if $highlight_theme == "normal"
-  $highlight-background   = #f8f8f8
+  $highlight-background   = #f7f7f7
   $highlight-current-line = #efefef
   $highlight-selection    = #d6d6d6
   $highlight-foreground   = #4d4d4c
   $highlight-comment      = #8e908c
   $highlight-red          = #c82829
-  $highlight-orange       = #fb6d19
+  $highlight-orange       = #f5871f
   $highlight-yellow       = #eab700
   $highlight-green        = #718c00
   $highlight-aqua         = #3e999f
   $highlight-blue         = #4271ae
   $highlight-purple       = #8959a8
+  $highlight-gutter       = {
+    color: #869194,
+    bg-color: #eff2f3
+  }
 
 if $highlight_theme == "night"
   $highlight-background   = #1d1f21
@@ -29,6 +38,10 @@ if $highlight_theme == "night"
   $highlight-aqua         = #8abeb7
   $highlight-blue         = #81a2be
   $highlight-purple       = #b294bb
+  $highlight-gutter       = {
+    color: lighten($highlight-background, 50%),
+    bg-color: darken($highlight-background, 100%)
+  }
 
 if $highlight_theme == "night eighties"
   $highlight-background   = #2d2d2d
@@ -43,6 +56,10 @@ if $highlight_theme == "night eighties"
   $highlight-aqua         = #66cccc
   $highlight-blue         = #6699cc
   $highlight-purple       = #cc99cc
+  $highlight-gutter       = {
+    color: $highlight-comment,
+    bg-color: darken($highlight-background, 40%)
+  }
 
 if $highlight_theme == "night blue"
   $highlight-background   = #002451
@@ -57,6 +74,10 @@ if $highlight_theme == "night blue"
   $highlight-aqua         = #99ffff
   $highlight-blue         = #bbdaff
   $highlight-purple       = #ebbbff
+  $highlight-gutter       = {
+    color: $highlight-comment,
+    bg-color: darken($highlight-background, 60%)
+  }
 
 if $highlight_theme == "night bright"
   $highlight-background   = #000000
@@ -71,124 +92,80 @@ if $highlight_theme == "night bright"
   $highlight-aqua         = #70c0b1
   $highlight-blue         = #7aa6da
   $highlight-purple       = #c397d8
-
-
-
-
-//======================================== Original =======================================//
-
-// https://github.com/chriskempson/tomorrow-theme
-
-// $highlight-background = #2d2d2d
-// $highlight-current-line = #393939
-// $highlight-selection = #515151
-// $highlight-foreground = #cccccc
-// $highlight-comment = #999999
-// $highlight-red = #f2777a
-// $highlight-orange = #f99157
-// $highlight-yellow = #ffcc66
-// $highlight-green = #99cc99
-// $highlight-aqua = #66cccc
-// $highlight-blue = #6699cc
-// $highlight-purple = #cc99cc
+  $highlight-gutter       = {
+    color: lighten($highlight-background, 40%),
+    bg-color: lighten($highlight-background, 16%)
+  }
 
 $code-block
-  background: $highlight-background
-  margin: 1em 0
-  padding: 15px 20px
-  border-style: solid
-  border-color: #eef1f8
-  border-width: 1px
-  border-radius: 2px
   overflow: auto
+  margin: 20px 0
   color: $highlight-foreground
-  line-height: 1.5
+  background: $highlight-background
+  line-height: 1.6
 
-$line-numbers
-  color: #666
-  font-size: 0.85em
-
-.entry-content
-  pre, code
-    font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace
+.post-content
+  pre
+    font-family: font-mono
   code
-    background: rgba(208,211,248,0.2)
-    color: #333
-    padding: 0 0.3em
+    padding: 0 4px
+    word-wrap: break-word
+    color: #555
+    background: #eee
+    border-radius: 2px
   pre
     @extend $code-block
+    padding: 10px
     code
+      padding: 0
+      color: $highlight-foreground
       background: none
       text-shadow: none
-      padding: 0
   .highlight
     @extend $code-block
     pre
       border: none
       margin: 0
-      padding: 0
     table
       margin: 0
       width: auto
       border: none
-    td.code
+    td
       border: none
       padding: 0
-      line-height: 1.5
     figcaption
       clearfix()
-      font-size: 0.85em
-      color: $highlight-comment
+      font-size: 1em
+      color: $highlight-foreground
       line-height: 1em
       margin-bottom: 1em
       a
         float: right
+        color: $highlight-foreground
+        &:hover
+          border-bottom: $highlight-foreground
     .gutter pre
-      @extend $line-numbers
+      color: $highlight-gutter.color
+      background-color: $highlight-gutter.bg-color
       text-align: right
-      padding-right: 20px
+    .code pre
+      width: 100%
+      background-color: $highlight-background
     .line
-      height: 1.5
-    .line.marked
-      background: $highlight-selection
-  .gist
-    margin: 0 20px * -1
-    border-style: solid
-    border-color: #eef1f8
-    border-width: 1px 0
-    background: $highlight-background
-    padding: 15px 20px 15px 0
-    .gist-file
+      height: 20px
+  .gutter
+    user-select: none
+  .gist table
+    width: auto
+    td
       border: none
-      font-family: "Source Code Pro", Consolas, Monaco, Menlo, Consolas, monospace
-      margin: 0
-      .gist-data
-        background: none
-        border: none
-        .line-numbers
-          @extend $line-numbers
-          background: none
-          border: none
-          padding: 0 20px 0 0
-        .line-data
-          padding: 0 !important
-      .highlight
-        margin: 0
-        padding: 0
-        border: none
-      .gist-meta
-        background: $highlight-background
-        color: $highlight-comment
-        font: 0.85em -apple-system, "Arial", BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif
-        text-shadow: 0 0
-        padding: 0
-        margin-top: 1em
-        margin-left: 20px
-        a
-          color: #272727
-          font-weight: normal
-          &:hover
-            text-decoration: underline
+
+  pre .deletion
+    background: $highlight-deletion
+  pre .addition
+    background: $highlight-addition
+  pre .meta
+    color: $highlight-purple
 
 pre
   .comment
@@ -213,18 +190,20 @@ pre
   .literal
   .params
   .constant
+  .command
     color: $highlight-orange
-  .class
   .ruby .class .title
   .css .rules .attribute
-    color: $highlight-green
   .string
   .value
   .inheritance
   .header
   .ruby .symbol
   .xml .cdata
+  .number
+  .formula
     color: $highlight-green
+  .title
   .css .hexcolor
     color: $highlight-aqua
   .function

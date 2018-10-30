@@ -35,9 +35,10 @@ widgets:
 # Value is the target link
 social:
   Github: https://github.com
-  Facebook: https://www.facebook.com
+  Facebook: https://facebook.com
+  Twitter: https://twitter.com
   Google+: https://plus.google.com
-  Weibo: http://www.weibo.com
+  Youtube: https://youtube.com
 
 # Code Highlight theme
 # Available value:

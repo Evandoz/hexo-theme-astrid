@@ -1,20 +1,17 @@
-<header class="page-header">
-  <h1 class="page-title"><%= __('category_total_count', site.categories.length) %></h1>
-</header>
-<div class="hentry archives-article-wrap">
-  <% site.categories.sort('name').map(function(category){  %>
-    <div class="archives-wrap">
-      <div class="archive-year-wrap" id="<%= category.name %>">
-        <h2 class="archive-category"><%= category.name %></h2>
-      </div>
-      <div class="archive-content-wrap">
-        <% category.posts.sort('-date').map(function(post, i){  %>
-          <%- partial('_partial/archive-post', {post: post, index: true}) %>
-          <% if (post.subtitle && post.subtitle.length) { %>
-            <h3 class="post-subtitle"><%- post.subtitle %></h3>
-          <% } %>
-        <% }) %>
-      </div>
-    </div>
-  <% }) %>
+<!-- 分类页面，可选择性注释部分模块 -->
+
+<div class="archive">
+  <h1 class="archive-count"><%= __('category_total_count', site.categories.length) %></h1>
 </div>
+
+<div class="archive list">
+  <% if(site.categories.length) { %>
+    <%- list_categories({class: 'archive'}) %>
+  <% } %>
+</div>
+
+<% site.categories.sort('name').map(function(category){  %>
+  <%- partial('_partial/archive', {
+    page: category, title: category.name, pagination: config.category, index: true
+  }) %>
+<% }) %>
